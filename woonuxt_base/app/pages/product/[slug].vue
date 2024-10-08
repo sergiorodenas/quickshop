@@ -1,18 +1,24 @@
 <script lang="ts" setup>
 import { StockStatusEnum, ProductTypesEnum, type AddToCartInput } from '#woo';
 
+
 const route = useRoute();
 const { storeSettings } = useAppConfig();
 const { arraysEqual, formatArray, checkForVariationTypeOfAny } = useHelpers();
 const { addToCart, isUpdatingCart } = useCart();
 const { t } = useI18n();
 const slug = route.params.slug as string;
+const  { $useGql2 }  = useNuxtApp();
 
-const { data } = await useAsyncGql('getProduct', { slug });
+
+//const { data } = await useAsyncGql('getProduct', { slug });
+
+const { data } = $useGql2("getProduct");
+
+
 if (!data.value?.product) {
   throw showError({ statusCode: 404, statusMessage: t('messages.shop.productNotFound') });
 }
-
 const product = ref<Product>(data?.value?.product);
 const quantity = ref<number>(1);
 const activeVariation = ref<Variation | null>(null);
@@ -38,7 +44,9 @@ const mergeLiveStockStatus = (payload: Product): void => {
 
 onMounted(async () => {
   try {
-    const { product } = await GqlGetStockStatus({ slug });
+    //const { product } = await GqlGetStockStatus({ slug });
+    const { data } = $useGql2('getStockStatus');
+    const { product } = data;
     if (product) mergeLiveStockStatus(product as Product);
   } catch (error: any) {
     const errorMessage = error?.gqlErrors?.[0].message;

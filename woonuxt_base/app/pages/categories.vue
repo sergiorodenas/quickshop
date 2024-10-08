@@ -1,6 +1,13 @@
 <script lang="ts" setup>
-const { data } = await useAsyncGql('getProductCategories');
+
+const  { $useGql2 }  = useNuxtApp();
+const { data } = $useGql2("getProductCategories");
+
+console.log('data', data);
+console.log('productCategories', data.value.productCategories?.nodes);
+
 const productCategories = data.value.productCategories?.nodes as ProductCategory[];
+
 
 useHead({
   title: `Categories`,

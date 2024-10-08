@@ -1,0 +1,115 @@
+{
+    "data": {
+        "value": {
+        "productCategories": {
+            
+            "nodes": [
+                {
+                    "count": 12,
+                    "databaseId": 30,
+                    "id": "dGVybTozMA==",
+                    "name": "Clothing",
+                    "slug": "clothing",
+                    "image": {
+                        "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/Screenshot-2021-10-10-at-10.50.32-a.m..png",
+                        "altText": "clothes on hangers",
+                        "title": "Screenshot 2021-10-10 at 10.50.32 a.m."
+                    }
+                },
+                {
+                    "count": 10,
+                    "databaseId": 55,
+                    "id": "dGVybTo1NQ==",
+                    "name": "T-shirts",
+                    "slug": "t-shirts",
+                    "image": {
+                        "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/Screenshot-2021-10-10-at-11.10.03-a.m.-768x826.png",
+                        "altText": "white s-shirt",
+                        "title": "Screenshot 2021-10-10 at 11.10.03 a.m."
+                    }
+                },
+                {
+                    "count": 9,
+                    "databaseId": 54,
+                    "id": "dGVybTo1NA==",
+                    "name": "Hoodies",
+                    "slug": "hoodies-clothing",
+                    "image": {
+                        "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/Screenshot-2021-10-10-at-10.52.41-a.m.-768x950.png",
+                        "altText": "white hoodie",
+                        "title": "Screenshot 2021-10-10 at 10.52.41 a.m."
+                    }
+                },
+                {
+                    "count": 9,
+                    "databaseId": 29,
+                    "id": "dGVybToyOQ==",
+                    "name": "Music",
+                    "slug": "music",
+                    "image": {
+                        "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/Screenshot-2021-10-10-at-10.54.06-a.m.-768x852.png",
+                        "altText": "music interments",
+                        "title": "Screenshot 2021-10-10 at 10.54.06 a.m."
+                    }
+                },
+                {
+                    "count": 6,
+                    "databaseId": 52,
+                    "id": "dGVybTo1Mg==",
+                    "name": "Albums",
+                    "slug": "albums",
+                    "image": {
+                        "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/Screenshot-2021-10-10-at-11.15.10-a.m..png",
+                        "altText": "music album disc",
+                        "title": "Screenshot 2021-10-10 at 11.15.10 a.m."
+                    }
+                },
+                {
+                    "count": 5,
+                    "databaseId": 53,
+                    "id": "dGVybTo1Mw==",
+                    "name": "Posters",
+                    "slug": "posters",
+                    "image": {
+                        "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/Screenshot-2021-10-10-at-11.06.50-a.m..png",
+                        "altText": "old school photos",
+                        "title": "Screenshot 2021-10-10 at 11.06.50 a.m."
+                    }
+                },
+                {
+                    "count": 5,
+                    "databaseId": 27,
+                    "id": "dGVybToyNw==",
+                    "name": "Accessories",
+                    "slug": "accessories",
+                    "image": {
+                        "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/Screenshot-2021-10-10-at-10.48.26-a.m.-768x1009.png",
+                        "altText": "mixed jewellery",
+                        "title": "Screenshot 2021-10-10 at 10.48.26 a.m."
+                    }
+                },
+                {
+                    "count": 1,
+                    "databaseId": 31,
+                    "id": "dGVybTozMQ==",
+                    "name": "Decor",
+                    "slug": "decor",
+                    "image": {
+                        "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/Screenshot-2021-10-10-at-11.04.00-a.m.-768x908.png",
+                        "altText": "indoor plant",
+                        "title": "Screenshot 2021-10-10 at 11.04.00 a.m."
+                    }
+                }
+            ]
+        }
+        }
+    },
+    "extensions": {
+        "debug": [
+            {
+                "type": "DEBUG_LOGS_INACTIVE",
+                "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+            }
+        ]
+    }
+}

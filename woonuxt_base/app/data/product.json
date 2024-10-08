@@ -1,0 +1,1313 @@
+{
+    "data": {
+        "dep": {
+            "version": 0,
+            "sc": 0
+        },
+        "__v_isRef": true,
+        "__v_isShallow": true,
+        "_rawValue": {
+            "product": {
+                "name": "Woo Logo",
+                "type": "SIMPLE",
+                "databaseId": 748,
+                "id": "cG9zdDo3NDg=",
+                "metaData": [
+                    {
+                        "id": "14402",
+                        "key": "_yoast_wpseo_content_score",
+                        "value": "90"
+                    },
+                    {
+                        "id": "14403",
+                        "key": "_yoast_wpseo_estimated-reading-time-minutes",
+                        "value": null
+                    },
+                    {
+                        "id": "14404",
+                        "key": "_yoast_wpseo_wordproof_timestamp",
+                        "value": null
+                    },
+                    {
+                        "id": "18854",
+                        "key": "inline_featured_image",
+                        "value": null
+                    },
+                    {
+                        "id": "42968",
+                        "key": "_yoast_wpseo_primary_product_cat",
+                        "value": null
+                    },
+                    {
+                        "id": "45119",
+                        "key": "_wp_old_date",
+                        "value": "2021-10-09"
+                    }
+                ],
+                "slug": "woo-logo-3",
+                "sku": "T-SHIRT-WOO-LOGO",
+                "description": "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>\n",
+                "rawDescription": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.",
+                "shortDescription": "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>\n",
+                "attributes": {
+                    "nodes": [
+                        {
+                            "variation": false,
+                            "name": "pa_color",
+                            "id": "cGFfY29sb3I6NzQ4OnBhX2NvbG9y",
+                            "options": [
+                                "red"
+                            ],
+                            "label": "color",
+                            "scope": "GLOBAL",
+                            "slug": "pa_color",
+                            "terms": {
+                                "nodes": [
+                                    {
+                                        "name": "Red",
+                                        "slug": "red",
+                                        "taxonomyName": "pa_color",
+                                        "databaseId": 22
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "productCategories": {
+                    "nodes": [
+                        {
+                            "databaseId": 30,
+                            "slug": "clothing",
+                            "name": "Clothing",
+                            "count": 12
+                        },
+                        {
+                            "databaseId": 55,
+                            "slug": "t-shirts",
+                            "name": "T-shirts",
+                            "count": 10
+                        }
+                    ]
+                },
+                "terms": {
+                    "nodes": [
+                        {
+                            "taxonomyName": "product_cat",
+                            "slug": "clothing"
+                        },
+                        {
+                            "taxonomyName": "pa_color",
+                            "slug": "red"
+                        },
+                        {
+                            "taxonomyName": "product_type",
+                            "slug": "simple"
+                        },
+                        {
+                            "taxonomyName": "product_cat",
+                            "slug": "t-shirts"
+                        }
+                    ]
+                },
+                "price": "€18.00",
+                "rawPrice": "18",
+                "date": "2023-10-29T11:11:31+00:00",
+                "regularPrice": "€20.00",
+                "rawRegularPrice": "20",
+                "salePrice": "€18.00",
+                "rawSalePrice": "18",
+                "stockStatus": "IN_STOCK",
+                "stockQuantity": 14,
+                "lowStockAmount": 5,
+                "averageRating": 0,
+                "weight": null,
+                "length": null,
+                "width": null,
+                "height": null,
+                "reviewCount": 0,
+                "onSale": true,
+                "virtual": false,
+                "image": {
+                    "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_1_front.jpg",
+                    "altText": "",
+                    "title": "T_1_front.jpg",
+                    "databaseId": 820,
+                    "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_1_front-150x150.jpg",
+                    "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_1_front-500x500.jpg"
+                },
+                "galleryImages": {
+                    "nodes": [
+                        {
+                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_1_back.jpg",
+                            "altText": "",
+                            "title": "T_1_back.jpg",
+                            "databaseId": 821
+                        }
+                    ]
+                },
+                "related": {
+                    "nodes": [
+                        {
+                            "name": "Woo Ninja",
+                            "slug": "woo-ninja-2",
+                            "price": "€45.00",
+                            "rawPrice": "45",
+                            "date": "2021-06-09T11:11:31+01:00",
+                            "regularPrice": "€50.00",
+                            "rawRegularPrice": "50",
+                            "salePrice": "€45.00",
+                            "rawSalePrice": "45",
+                            "stockStatus": "IN_STOCK",
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "averageRating": 4,
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "reviewCount": 1,
+                            "onSale": true,
+                            "virtual": false,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_2_front.jpg",
+                                "altText": "",
+                                "title": "hoodie_2_front.jpg",
+                                "databaseId": 797,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_2_front-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_2_front-500x500.jpg"
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_2_back.jpg",
+                                        "altText": "",
+                                        "title": "hoodie_2_back.jpg",
+                                        "databaseId": 798
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Woo Ninja",
+                            "slug": "woo-ninja-3",
+                            "price": "€26.95",
+                            "rawPrice": "26.95",
+                            "date": "2021-10-09T11:11:31+01:00",
+                            "regularPrice": "€26.95",
+                            "rawRegularPrice": "26.95",
+                            "salePrice": null,
+                            "rawSalePrice": null,
+                            "stockStatus": "IN_STOCK",
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "averageRating": 0,
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "reviewCount": 0,
+                            "onSale": false,
+                            "virtual": false,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_6_front.jpg",
+                                "altText": "",
+                                "title": "T_6_front.jpg",
+                                "databaseId": 807,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_6_front-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_6_front-500x500.jpg"
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_6_back.jpg",
+                                        "altText": "",
+                                        "title": "T_6_back.jpg",
+                                        "databaseId": 808
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Woo Logo",
+                            "slug": "woo-logo-2",
+                            "price": "€35.00",
+                            "rawPrice": "35",
+                            "date": "2021-10-09T11:11:31+01:00",
+                            "regularPrice": "€35.00",
+                            "rawRegularPrice": "35",
+                            "salePrice": null,
+                            "rawSalePrice": null,
+                            "stockStatus": "IN_STOCK",
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "averageRating": 5,
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "reviewCount": 1,
+                            "onSale": false,
+                            "virtual": false,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_6_front.jpg",
+                                "altText": "",
+                                "title": "hoodie_6_front.jpg",
+                                "databaseId": 788,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_6_front-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_6_front-500x500.jpg"
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_6_back.jpg",
+                                        "altText": "",
+                                        "title": "hoodie_6_back.jpg",
+                                        "databaseId": 789
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Ship Your Idea",
+                            "slug": "ship-your-idea-3",
+                            "price": "€20.00",
+                            "rawPrice": "20.00, 20.00",
+                            "date": "2021-10-09T11:11:31+01:00",
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front.jpg",
+                                "altText": "",
+                                "title": "T_4_front.jpg",
+                                "databaseId": 811,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front-500x500.jpg"
+                            },
+                            "averageRating": 0,
+                            "reviewCount": 0,
+                            "onSale": false,
+                            "regularPrice": "€20.00",
+                            "rawRegularPrice": "20.00, 20.00",
+                            "salePrice": null,
+                            "rawSalePrice": null,
+                            "stockStatus": "IN_STOCK",
+                            "totalSales": null,
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "defaultAttributes": null,
+                            "variations": {
+                                "nodes": [
+                                    {
+                                        "name": "Ship Your Idea - Green",
+                                        "databaseId": 816,
+                                        "price": "€20.00",
+                                        "regularPrice": "€20.00",
+                                        "salePrice": null,
+                                        "slug": "ship-your-idea-green",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_front.jpg",
+                                            "altText": "",
+                                            "title": "T_3_front.jpg",
+                                            "databaseId": 813,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_front-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_front-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 19,
+                                                    "value": "green",
+                                                    "label": "color"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "Ship Your Idea - Black",
+                                        "databaseId": 817,
+                                        "price": "€20.00",
+                                        "regularPrice": "€20.00",
+                                        "salePrice": null,
+                                        "slug": "ship-your-idea-black",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front1.jpg",
+                                            "altText": "",
+                                            "title": "T_4_front1.jpg",
+                                            "databaseId": 815,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front1-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front1-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 56,
+                                                    "value": "black",
+                                                    "label": "color"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_back.jpg",
+                                        "altText": "",
+                                        "title": "T_3_back.jpg",
+                                        "databaseId": 812
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_front.jpg",
+                                        "altText": "",
+                                        "title": "T_3_front.jpg",
+                                        "databaseId": 813
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_back.jpg",
+                                        "altText": "",
+                                        "title": "T_4_back.jpg",
+                                        "databaseId": 814
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front1.jpg",
+                                        "altText": "",
+                                        "title": "T_4_front1.jpg",
+                                        "databaseId": 815
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Hoodie",
+                            "slug": "hoodie",
+                            "price": "€45.00",
+                            "rawPrice": "45.00, 45.00, 45.00, 45.00",
+                            "date": "2021-05-29T15:30:15+01:00",
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2.jpg",
+                                "altText": "",
+                                "title": "hoodie-2.jpg",
+                                "databaseId": 200,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2-500x500.jpg"
+                            },
+                            "averageRating": 4,
+                            "reviewCount": 1,
+                            "onSale": false,
+                            "regularPrice": "€45.00",
+                            "rawRegularPrice": "45.00, 45.00, 45.00, 45.00",
+                            "salePrice": null,
+                            "rawSalePrice": null,
+                            "stockStatus": "IN_STOCK",
+                            "totalSales": null,
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "defaultAttributes": {
+                                "nodes": [
+                                    {
+                                        "name": "pa_color",
+                                        "attributeId": 22,
+                                        "value": "red",
+                                        "label": "color"
+                                    },
+                                    {
+                                        "name": "logo",
+                                        "attributeId": 0,
+                                        "value": "No",
+                                        "label": "logo"
+                                    },
+                                    {
+                                        "name": "pa_size",
+                                        "attributeId": 20,
+                                        "value": "large",
+                                        "label": "size"
+                                    }
+                                ]
+                            },
+                            "variations": {
+                                "nodes": [
+                                    {
+                                        "name": "Hoodie",
+                                        "databaseId": 469,
+                                        "price": "€45.00",
+                                        "regularPrice": "€45.00",
+                                        "salePrice": null,
+                                        "slug": "hoodie-blue-no",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-blue-1.jpg",
+                                            "altText": "",
+                                            "title": "hoodie-blue-1.jpg",
+                                            "databaseId": 201,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-blue-1-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-blue-1-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 18,
+                                                    "value": "blue",
+                                                    "label": "color"
+                                                },
+                                                {
+                                                    "name": "logo",
+                                                    "attributeId": 0,
+                                                    "value": "No",
+                                                    "label": "logo"
+                                                },
+                                                {
+                                                    "name": "pa_size",
+                                                    "attributeId": 0,
+                                                    "value": "",
+                                                    "label": "size"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "Hoodie",
+                                        "databaseId": 468,
+                                        "price": "€45.00",
+                                        "regularPrice": "€45.00",
+                                        "salePrice": null,
+                                        "slug": "hoodie-green-no",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-green-1.jpg",
+                                            "altText": "",
+                                            "title": "hoodie-green-1.jpg",
+                                            "databaseId": 202,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-green-1-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-green-1-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 19,
+                                                    "value": "green",
+                                                    "label": "color"
+                                                },
+                                                {
+                                                    "name": "logo",
+                                                    "attributeId": 0,
+                                                    "value": "No",
+                                                    "label": "logo"
+                                                },
+                                                {
+                                                    "name": "pa_size",
+                                                    "attributeId": 0,
+                                                    "value": "",
+                                                    "label": "size"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "Hoodie",
+                                        "databaseId": 467,
+                                        "price": "€45.00",
+                                        "regularPrice": "€45.00",
+                                        "salePrice": null,
+                                        "slug": "hoodie-red-no",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2.jpg",
+                                            "altText": "",
+                                            "title": "hoodie-2.jpg",
+                                            "databaseId": 200,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 22,
+                                                    "value": "red",
+                                                    "label": "color"
+                                                },
+                                                {
+                                                    "name": "logo",
+                                                    "attributeId": 0,
+                                                    "value": "No",
+                                                    "label": "logo"
+                                                },
+                                                {
+                                                    "name": "pa_size",
+                                                    "attributeId": 0,
+                                                    "value": "",
+                                                    "label": "size"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "Hoodie",
+                                        "databaseId": 474,
+                                        "price": "€45.00",
+                                        "regularPrice": "€45.00",
+                                        "salePrice": null,
+                                        "slug": "hoodie-blue-yes",
+                                        "stockQuantity": 84,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-with-logo-2.jpg",
+                                            "altText": "",
+                                            "title": "hoodie-with-logo-2.jpg",
+                                            "databaseId": 203,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-with-logo-2-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-with-logo-2-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 18,
+                                                    "value": "blue",
+                                                    "label": "color"
+                                                },
+                                                {
+                                                    "name": "logo",
+                                                    "attributeId": 0,
+                                                    "value": "Yes",
+                                                    "label": "logo"
+                                                },
+                                                {
+                                                    "name": "pa_size",
+                                                    "attributeId": 0,
+                                                    "value": "",
+                                                    "label": "size"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-with-logo-2.jpg",
+                                        "altText": "",
+                                        "title": "hoodie-with-logo-2.jpg",
+                                        "databaseId": 203
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-green-1.jpg",
+                                        "altText": "",
+                                        "title": "hoodie-green-1.jpg",
+                                        "databaseId": 202
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-blue-1.jpg",
+                                        "altText": "",
+                                        "title": "hoodie-blue-1.jpg",
+                                        "databaseId": 201
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2.jpg",
+                                        "altText": "",
+                                        "title": "hoodie-2.jpg",
+                                        "databaseId": 200
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "reviews": {
+                    "averageRating": 0,
+                    "edges": []
+                }
+            }
+        },
+        "value": {
+            "product": {
+                "name": "Woo Logo",
+                "type": "SIMPLE",
+                "databaseId": 748,
+                "id": "cG9zdDo3NDg=",
+                "metaData": [
+                    {
+                        "id": "14402",
+                        "key": "_yoast_wpseo_content_score",
+                        "value": "90"
+                    },
+                    {
+                        "id": "14403",
+                        "key": "_yoast_wpseo_estimated-reading-time-minutes",
+                        "value": null
+                    },
+                    {
+                        "id": "14404",
+                        "key": "_yoast_wpseo_wordproof_timestamp",
+                        "value": null
+                    },
+                    {
+                        "id": "18854",
+                        "key": "inline_featured_image",
+                        "value": null
+                    },
+                    {
+                        "id": "42968",
+                        "key": "_yoast_wpseo_primary_product_cat",
+                        "value": null
+                    },
+                    {
+                        "id": "45119",
+                        "key": "_wp_old_date",
+                        "value": "2021-10-09"
+                    }
+                ],
+                "slug": "woo-logo-3",
+                "sku": "T-SHIRT-WOO-LOGO",
+                "description": "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>\n",
+                "rawDescription": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.",
+                "shortDescription": "<p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. Aenean ultricies mi vitae est. Mauris placerat eleifend leo.</p>\n",
+                "attributes": {
+                    "nodes": [
+                        {
+                            "variation": false,
+                            "name": "pa_color",
+                            "id": "cGFfY29sb3I6NzQ4OnBhX2NvbG9y",
+                            "options": [
+                                "red"
+                            ],
+                            "label": "color",
+                            "scope": "GLOBAL",
+                            "slug": "pa_color",
+                            "terms": {
+                                "nodes": [
+                                    {
+                                        "name": "Red",
+                                        "slug": "red",
+                                        "taxonomyName": "pa_color",
+                                        "databaseId": 22
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "productCategories": {
+                    "nodes": [
+                        {
+                            "databaseId": 30,
+                            "slug": "clothing",
+                            "name": "Clothing",
+                            "count": 12
+                        },
+                        {
+                            "databaseId": 55,
+                            "slug": "t-shirts",
+                            "name": "T-shirts",
+                            "count": 10
+                        }
+                    ]
+                },
+                "terms": {
+                    "nodes": [
+                        {
+                            "taxonomyName": "product_cat",
+                            "slug": "clothing"
+                        },
+                        {
+                            "taxonomyName": "pa_color",
+                            "slug": "red"
+                        },
+                        {
+                            "taxonomyName": "product_type",
+                            "slug": "simple"
+                        },
+                        {
+                            "taxonomyName": "product_cat",
+                            "slug": "t-shirts"
+                        }
+                    ]
+                },
+                "price": "€18.00",
+                "rawPrice": "18",
+                "date": "2023-10-29T11:11:31+00:00",
+                "regularPrice": "€20.00",
+                "rawRegularPrice": "20",
+                "salePrice": "€18.00",
+                "rawSalePrice": "18",
+                "stockStatus": "IN_STOCK",
+                "stockQuantity": 14,
+                "lowStockAmount": 5,
+                "averageRating": 0,
+                "weight": null,
+                "length": null,
+                "width": null,
+                "height": null,
+                "reviewCount": 0,
+                "onSale": true,
+                "virtual": false,
+                "image": {
+                    "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_1_front.jpg",
+                    "altText": "",
+                    "title": "T_1_front.jpg",
+                    "databaseId": 820,
+                    "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_1_front-150x150.jpg",
+                    "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_1_front-500x500.jpg"
+                },
+                "galleryImages": {
+                    "nodes": [
+                        {
+                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_1_back.jpg",
+                            "altText": "",
+                            "title": "T_1_back.jpg",
+                            "databaseId": 821
+                        }
+                    ]
+                },
+                "related": {
+                    "nodes": [
+                        {
+                            "name": "Woo Ninja",
+                            "slug": "woo-ninja-2",
+                            "price": "€45.00",
+                            "rawPrice": "45",
+                            "date": "2021-06-09T11:11:31+01:00",
+                            "regularPrice": "€50.00",
+                            "rawRegularPrice": "50",
+                            "salePrice": "€45.00",
+                            "rawSalePrice": "45",
+                            "stockStatus": "IN_STOCK",
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "averageRating": 4,
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "reviewCount": 1,
+                            "onSale": true,
+                            "virtual": false,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_2_front.jpg",
+                                "altText": "",
+                                "title": "hoodie_2_front.jpg",
+                                "databaseId": 797,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_2_front-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_2_front-500x500.jpg"
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_2_back.jpg",
+                                        "altText": "",
+                                        "title": "hoodie_2_back.jpg",
+                                        "databaseId": 798
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Woo Ninja",
+                            "slug": "woo-ninja-3",
+                            "price": "€26.95",
+                            "rawPrice": "26.95",
+                            "date": "2021-10-09T11:11:31+01:00",
+                            "regularPrice": "€26.95",
+                            "rawRegularPrice": "26.95",
+                            "salePrice": null,
+                            "rawSalePrice": null,
+                            "stockStatus": "IN_STOCK",
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "averageRating": 0,
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "reviewCount": 0,
+                            "onSale": false,
+                            "virtual": false,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_6_front.jpg",
+                                "altText": "",
+                                "title": "T_6_front.jpg",
+                                "databaseId": 807,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_6_front-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_6_front-500x500.jpg"
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_6_back.jpg",
+                                        "altText": "",
+                                        "title": "T_6_back.jpg",
+                                        "databaseId": 808
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Woo Logo",
+                            "slug": "woo-logo-2",
+                            "price": "€35.00",
+                            "rawPrice": "35",
+                            "date": "2021-10-09T11:11:31+01:00",
+                            "regularPrice": "€35.00",
+                            "rawRegularPrice": "35",
+                            "salePrice": null,
+                            "rawSalePrice": null,
+                            "stockStatus": "IN_STOCK",
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "averageRating": 5,
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "reviewCount": 1,
+                            "onSale": false,
+                            "virtual": false,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_6_front.jpg",
+                                "altText": "",
+                                "title": "hoodie_6_front.jpg",
+                                "databaseId": 788,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_6_front-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_6_front-500x500.jpg"
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/hoodie_6_back.jpg",
+                                        "altText": "",
+                                        "title": "hoodie_6_back.jpg",
+                                        "databaseId": 789
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Ship Your Idea",
+                            "slug": "ship-your-idea-3",
+                            "price": "€20.00",
+                            "rawPrice": "20.00, 20.00",
+                            "date": "2021-10-09T11:11:31+01:00",
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front.jpg",
+                                "altText": "",
+                                "title": "T_4_front.jpg",
+                                "databaseId": 811,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front-500x500.jpg"
+                            },
+                            "averageRating": 0,
+                            "reviewCount": 0,
+                            "onSale": false,
+                            "regularPrice": "€20.00",
+                            "rawRegularPrice": "20.00, 20.00",
+                            "salePrice": null,
+                            "rawSalePrice": null,
+                            "stockStatus": "IN_STOCK",
+                            "totalSales": null,
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "defaultAttributes": null,
+                            "variations": {
+                                "nodes": [
+                                    {
+                                        "name": "Ship Your Idea - Green",
+                                        "databaseId": 816,
+                                        "price": "€20.00",
+                                        "regularPrice": "€20.00",
+                                        "salePrice": null,
+                                        "slug": "ship-your-idea-green",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_front.jpg",
+                                            "altText": "",
+                                            "title": "T_3_front.jpg",
+                                            "databaseId": 813,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_front-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_front-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 19,
+                                                    "value": "green",
+                                                    "label": "color"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "Ship Your Idea - Black",
+                                        "databaseId": 817,
+                                        "price": "€20.00",
+                                        "regularPrice": "€20.00",
+                                        "salePrice": null,
+                                        "slug": "ship-your-idea-black",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front1.jpg",
+                                            "altText": "",
+                                            "title": "T_4_front1.jpg",
+                                            "databaseId": 815,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front1-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front1-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 56,
+                                                    "value": "black",
+                                                    "label": "color"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_back.jpg",
+                                        "altText": "",
+                                        "title": "T_3_back.jpg",
+                                        "databaseId": 812
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_3_front.jpg",
+                                        "altText": "",
+                                        "title": "T_3_front.jpg",
+                                        "databaseId": 813
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_back.jpg",
+                                        "altText": "",
+                                        "title": "T_4_back.jpg",
+                                        "databaseId": 814
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2021/10/T_4_front1.jpg",
+                                        "altText": "",
+                                        "title": "T_4_front1.jpg",
+                                        "databaseId": 815
+                                    }
+                                ]
+                            }
+                        },
+                        {
+                            "name": "Hoodie",
+                            "slug": "hoodie",
+                            "price": "€45.00",
+                            "rawPrice": "45.00, 45.00, 45.00, 45.00",
+                            "date": "2021-05-29T15:30:15+01:00",
+                            "weight": null,
+                            "length": null,
+                            "width": null,
+                            "height": null,
+                            "image": {
+                                "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2.jpg",
+                                "altText": "",
+                                "title": "hoodie-2.jpg",
+                                "databaseId": 200,
+                                "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2-150x150.jpg",
+                                "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2-500x500.jpg"
+                            },
+                            "averageRating": 4,
+                            "reviewCount": 1,
+                            "onSale": false,
+                            "regularPrice": "€45.00",
+                            "rawRegularPrice": "45.00, 45.00, 45.00, 45.00",
+                            "salePrice": null,
+                            "rawSalePrice": null,
+                            "stockStatus": "IN_STOCK",
+                            "totalSales": null,
+                            "stockQuantity": null,
+                            "lowStockAmount": null,
+                            "defaultAttributes": {
+                                "nodes": [
+                                    {
+                                        "name": "pa_color",
+                                        "attributeId": 22,
+                                        "value": "red",
+                                        "label": "color"
+                                    },
+                                    {
+                                        "name": "logo",
+                                        "attributeId": 0,
+                                        "value": "No",
+                                        "label": "logo"
+                                    },
+                                    {
+                                        "name": "pa_size",
+                                        "attributeId": 20,
+                                        "value": "large",
+                                        "label": "size"
+                                    }
+                                ]
+                            },
+                            "variations": {
+                                "nodes": [
+                                    {
+                                        "name": "Hoodie",
+                                        "databaseId": 469,
+                                        "price": "€45.00",
+                                        "regularPrice": "€45.00",
+                                        "salePrice": null,
+                                        "slug": "hoodie-blue-no",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-blue-1.jpg",
+                                            "altText": "",
+                                            "title": "hoodie-blue-1.jpg",
+                                            "databaseId": 201,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-blue-1-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-blue-1-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 18,
+                                                    "value": "blue",
+                                                    "label": "color"
+                                                },
+                                                {
+                                                    "name": "logo",
+                                                    "attributeId": 0,
+                                                    "value": "No",
+                                                    "label": "logo"
+                                                },
+                                                {
+                                                    "name": "pa_size",
+                                                    "attributeId": 0,
+                                                    "value": "",
+                                                    "label": "size"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "Hoodie",
+                                        "databaseId": 468,
+                                        "price": "€45.00",
+                                        "regularPrice": "€45.00",
+                                        "salePrice": null,
+                                        "slug": "hoodie-green-no",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-green-1.jpg",
+                                            "altText": "",
+                                            "title": "hoodie-green-1.jpg",
+                                            "databaseId": 202,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-green-1-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-green-1-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 19,
+                                                    "value": "green",
+                                                    "label": "color"
+                                                },
+                                                {
+                                                    "name": "logo",
+                                                    "attributeId": 0,
+                                                    "value": "No",
+                                                    "label": "logo"
+                                                },
+                                                {
+                                                    "name": "pa_size",
+                                                    "attributeId": 0,
+                                                    "value": "",
+                                                    "label": "size"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "Hoodie",
+                                        "databaseId": 467,
+                                        "price": "€45.00",
+                                        "regularPrice": "€45.00",
+                                        "salePrice": null,
+                                        "slug": "hoodie-red-no",
+                                        "stockQuantity": null,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2.jpg",
+                                            "altText": "",
+                                            "title": "hoodie-2.jpg",
+                                            "databaseId": 200,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 22,
+                                                    "value": "red",
+                                                    "label": "color"
+                                                },
+                                                {
+                                                    "name": "logo",
+                                                    "attributeId": 0,
+                                                    "value": "No",
+                                                    "label": "logo"
+                                                },
+                                                {
+                                                    "name": "pa_size",
+                                                    "attributeId": 0,
+                                                    "value": "",
+                                                    "label": "size"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "name": "Hoodie",
+                                        "databaseId": 474,
+                                        "price": "€45.00",
+                                        "regularPrice": "€45.00",
+                                        "salePrice": null,
+                                        "slug": "hoodie-blue-yes",
+                                        "stockQuantity": 84,
+                                        "stockStatus": "IN_STOCK",
+                                        "hasAttributes": null,
+                                        "image": {
+                                            "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-with-logo-2.jpg",
+                                            "altText": "",
+                                            "title": "hoodie-with-logo-2.jpg",
+                                            "databaseId": 203,
+                                            "cartSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-with-logo-2-150x150.jpg",
+                                            "producCardSourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-with-logo-2-500x500.jpg"
+                                        },
+                                        "attributes": {
+                                            "nodes": [
+                                                {
+                                                    "name": "pa_color",
+                                                    "attributeId": 18,
+                                                    "value": "blue",
+                                                    "label": "color"
+                                                },
+                                                {
+                                                    "name": "logo",
+                                                    "attributeId": 0,
+                                                    "value": "Yes",
+                                                    "label": "logo"
+                                                },
+                                                {
+                                                    "name": "pa_size",
+                                                    "attributeId": 0,
+                                                    "value": "",
+                                                    "label": "size"
+                                                }
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            "galleryImages": {
+                                "nodes": [
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-with-logo-2.jpg",
+                                        "altText": "",
+                                        "title": "hoodie-with-logo-2.jpg",
+                                        "databaseId": 203
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-green-1.jpg",
+                                        "altText": "",
+                                        "title": "hoodie-green-1.jpg",
+                                        "databaseId": 202
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-blue-1.jpg",
+                                        "altText": "",
+                                        "title": "hoodie-blue-1.jpg",
+                                        "databaseId": 201
+                                    },
+                                    {
+                                        "sourceUrl": "https://secure.woonuxt.com/wp-content/uploads/2019/01/hoodie-2.jpg",
+                                        "altText": "",
+                                        "title": "hoodie-2.jpg",
+                                        "databaseId": 200
+                                    }
+                                ]
+                            }
+                        }
+                    ]
+                },
+                "reviews": {
+                    "averageRating": 0,
+                    "edges": []
+                }
+            }
+        }
+    },
+    "pending": {
+        "dep": {
+            "version": 0,
+            "sc": 0
+        },
+        "__v_isRef": true,
+        "__v_isShallow": false,
+        "_rawValue": false,
+        "_value": false
+    },
+    "error": {
+        "_object": {},
+        "_key": "gql:data:o9nEtMRizB",
+        "__v_isRef": true
+    },
+    "status": {
+        "dep": {
+            "version": 1,
+            "sc": 0
+        },
+        "__v_isRef": true,
+        "__v_isShallow": false,
+        "_rawValue": "success",
+        "_value": "success"
+    }
+}

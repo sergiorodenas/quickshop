@@ -3,8 +3,10 @@ const { setProducts, updateProductList } = useProducts();
 const route = useRoute();
 const { storeSettings } = useAppConfig();
 const { isQueryEmpty } = useHelpers();
+const { $useGql2 } = useNuxtApp();
 
-const { data } = await useAsyncGql('getProducts');
+const { data } = $useGql2('getProducts');
+console.log(data);
 const allProducts = (data.value?.products?.nodes || []) as Product[];
 setProducts(allProducts);
 

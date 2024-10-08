@@ -1,3 +1,8 @@
+import dataJson from "../data/product.json"
+import stockData from "../data/stockStatus.json"
+import getProducts from "../data/getProducts.json"
+import getProductsCategories from "../data/getProductsCategories.json";
+
 export default defineNuxtPlugin(async (nuxtApp) => {
   if (!import.meta.env.SSR) {
     const { storeSettings } = useAppConfig();
@@ -17,6 +22,25 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         });
         return;
       }
+
+      const useGql2 = (methodName: string) => {
+
+        switch (methodName) {
+
+          case 'getProduct': return dataJson;
+          
+          case 'getProducts': return getProducts;
+          
+          case 'getStockStatus': return stockData;
+
+          case "getProductCategories": return getProductsCategories;
+
+          default: return "Method not found";
+        };
+
+      };
+
+      nuxtApp.provide('useGql2', useGql2);
 
       initialised = true;
 
