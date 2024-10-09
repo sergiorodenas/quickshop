@@ -33,7 +33,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
           
           case 'getStockStatus': return stockData;
 
-          case "getProductCategories": return getProductsCategories;
+          case "getProductCategories": return getProducts
 
           default: return "Method not found";
         };

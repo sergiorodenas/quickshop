@@ -1,11 +1,17 @@
 <script lang="ts" setup>
 import { ProductsOrderByEnum } from '#woo';
 const { siteName, description, shortDescription, siteImage } = useAppConfig();
+const  { $useGql2 }  = useNuxtApp();
+//const { data } = $useGql2("getProductCategories");
 
 const { data } = await useAsyncGql('getProductCategories', { first: 6 });
+console.log("data",data);
 const productCategories = data.value?.productCategories?.nodes || [];
 
 const { data: productData } = await useAsyncGql('getProducts', { first: 5, orderby: ProductsOrderByEnum.POPULARITY });
+console.log('gql', await useAsyncGql('getProducts', { first: 5, orderby: ProductsOrderByEnum.POPULARITY }))
+console.log("productData",productData);
+
 const popularProducts = productData.value.products?.nodes || [];
 
 useSeoMeta({
