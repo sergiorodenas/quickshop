@@ -1,18 +1,18 @@
 <script lang="ts" setup>
 import { ProductsOrderByEnum } from '#woo';
 const { siteName, description, shortDescription, siteImage } = useAppConfig();
-const  { $useGql2 }  = useNuxtApp();
-//const { data } = $useGql2("getProductCategories");
+const { $useGql2 } = useNuxtApp();
+const { data } = $useGql2("getProductCategories");
 
-const { data } = await useAsyncGql('getProductCategories', { first: 6 });
-console.log("data",data);
-const productCategories = data.value?.productCategories?.nodes || [];
+//const { data } = await useAsyncGql('getProductCategories', { first: 6 });
 
-const { data: productData } = await useAsyncGql('getProducts', { first: 5, orderby: ProductsOrderByEnum.POPULARITY });
-console.log('gql', await useAsyncGql('getProducts', { first: 5, orderby: ProductsOrderByEnum.POPULARITY }))
-console.log("productData",productData);
+const productCategories = data.value.productCategories.nodes.filter((elem, index) => index < 6) || [];
 
-const popularProducts = productData.value.products?.nodes || [];
+//const { data: productData } = await useAsyncGql('getProducts', { first: 5, orderby: ProductsOrderByEnum.POPULARITY });
+
+const productData = { value: data.value }
+
+const popularProducts = productData.value.products?.nodes.filter((elem, index) => index < 5) || [];
 
 useSeoMeta({
   title: `Home`,
@@ -28,7 +28,8 @@ useSeoMeta({
   <main>
     <HeroBanner />
 
-    <div class="container flex flex-wrap items-center justify-center my-16 text-center gap-x-8 gap-y-4 brand lg:justify-between">
+    <div
+      class="container flex flex-wrap items-center justify-center my-16 text-center gap-x-8 gap-y-4 brand lg:justify-between">
       <img src="/images/logoipsum-211.svg" alt="Brand 1" width="132" height="35" />
       <img src="/images/logoipsum-221.svg" alt="Brand 2" width="119" height="30" />
       <img src="/images/logoipsum-225.svg" alt="Brand 3" width="49" height="48" />
