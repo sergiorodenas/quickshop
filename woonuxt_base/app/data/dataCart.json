@@ -1,85 +1,85 @@
 {
-    "data": {
-        "cart": {
-            "total": "\u20ac0.00",
-            "rawTotal": "0",
-            "subtotal": "\u20ac0.00",
-            "totalTax": "\u20ac0.00",
-            "discountTotal": "\u20ac0.00",
-            "rawDiscountTotal": "0",
-            "shippingTotal": "\u20ac0.00",
-            "chosenShippingMethods": [],
-            "availableShippingMethods": [],
-            "appliedCoupons": null,
-            "isEmpty": true,
-            "contents": {
-                "itemCount": 0,
-                "productCount": 0,
-                "nodes": []
-            }
-        },
-        "customer": {
-            "lastName": null,
-            "email": null,
-            "firstName": null,
-            "username": null,
-            "databaseId": null,
-            "sessionToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NlY3VyZS53b29udXh0LmNvbSIsImlhdCI6MTcyODQxMzc3NywibmJmIjoxNzI4NDEzNzc3LCJleHAiOjE3Mjg1ODY1NzcsImRhdGEiOnsiY3VzdG9tZXJfaWQiOiJ0X2I3YmYxOGRmNmY0MDI2NjljZTgwYWY1OWU5ZDcxZCJ9fQ.5W8T4fnwKv_EXWiRiI7nLY-7kdld_9JhZjlmqPpa2zQ",
-            "isPayingCustomer": false,
-            "billing": {
-                "address1": null,
-                "address2": null,
-                "city": null,
-                "country": "IE",
-                "email": null,
-                "firstName": null,
-                "lastName": null,
-                "phone": null,
-                "postcode": null,
-                "company": null,
-                "state": "KK"
-            },
-            "shipping": {
-                "address1": null,
-                "address2": null,
-                "city": null,
-                "country": "IE",
-                "email": null,
-                "firstName": null,
-                "lastName": null,
-                "phone": null,
-                "postcode": null,
-                "company": null,
-                "state": "KK"
-            }
-        },
-        "viewer": null,
-        "paymentGateways": {
-            "nodes": [
-                {
-                    "title": "Credit \/ Debit Card",
-                    "id": "stripe",
-                    "description": null
-                },
-                {
-                    "title": "PayPal",
-                    "id": "paypal",
-                    "description": "SANDBOX ENABLED. You can use sandbox testing accounts only. See the <a href=\"https:\/\/developer.paypal.com\/docs\/classic\/lifecycle\/ug_sandbox\/\">PayPal Sandbox Testing Guide<\/a> for more details."
-                },
-                {
-                    "title": "COD",
-                    "id": "cod",
-                    "description": "Pay with cash upon delivery."
-                }
-            ]
-        }
+  "data": {
+    "cart": {
+      "total": "\u20ac0.00",
+      "rawTotal": "0",
+      "subtotal": "\u20ac0.00",
+      "totalTax": "\u20ac0.00",
+      "discountTotal": "\u20ac0.00",
+      "rawDiscountTotal": "0",
+      "shippingTotal": "\u20ac0.00",
+      "chosenShippingMethods": [],
+      "availableShippingMethods": [],
+      "appliedCoupons": null,
+      "isEmpty": true,
+      "contents": {
+        "itemCount": 0,
+        "productCount": 0,
+        "nodes": []
+      }
     },
-    "extensions": {
-        "debug": [
-            {
-                "type": "DEBUG_LOGS_INACTIVE",
-                "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
-            }
-        ]
+    "customer": {
+      "lastName": null,
+      "email": null,
+      "firstName": null,
+      "username": null,
+      "databaseId": null,
+      "sessionToken": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3NlY3VyZS53b29udXh0LmNvbSIsImlhdCI6MTcyODQxMzc3NywibmJmIjoxNzI4NDEzNzc3LCJleHAiOjE3Mjg1ODY1NzcsImRhdGEiOnsiY3VzdG9tZXJfaWQiOiJ0X2I3YmYxOGRmNmY0MDI2NjljZTgwYWY1OWU5ZDcxZCJ9fQ.5W8T4fnwKv_EXWiRiI7nLY-7kdld_9JhZjlmqPpa2zQ",
+      "isPayingCustomer": false,
+      "billing": {
+        "address1": null,
+        "address2": null,
+        "city": null,
+        "country": "IE",
+        "email": null,
+        "firstName": null,
+        "lastName": null,
+        "phone": null,
+        "postcode": null,
+        "company": null,
+        "state": "KK"
+      },
+      "shipping": {
+        "address1": null,
+        "address2": null,
+        "city": null,
+        "country": "IE",
+        "email": null,
+        "firstName": null,
+        "lastName": null,
+        "phone": null,
+        "postcode": null,
+        "company": null,
+        "state": "KK"
+      }
+    },
+    "viewer": null,
+    "paymentGateways": {
+      "nodes": [
+        {
+          "title": "Credit / Debit Card",
+          "id": "stripe",
+          "description": null
+        },
+        {
+          "title": "PayPal",
+          "id": "paypal",
+          "description": "SANDBOX ENABLED. You can use sandbox testing accounts only. See the <a href=\"https://developer.paypal.com/docs/classic/lifecycle/ug_sandbox/\">PayPal Sandbox Testing Guide</a> for more details."
+        },
+        {
+          "title": "COD",
+          "id": "cod",
+          "description": "Pay with cash upon delivery."
+        }
+      ]
     }
+  },
+  "extensions": {
+    "debug": [
+      {
+        "type": "DEBUG_LOGS_INACTIVE",
+        "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+      }
+    ]
+  }
 }
