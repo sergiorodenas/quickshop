@@ -3,9 +3,10 @@ const { setProducts, updateProductList } = useProducts();
 const { isQueryEmpty } = useHelpers();
 const { storeSettings } = useAppConfig();
 const route = useRoute();
-const slug = route.params.slug;
-
-const { data } = await useAsyncGql('getProducts', { slug });
+//const slug = route.params.slug;
+//const { data } = await useAsyncGql('getProducts', { slug });
+const { $useGql2 } = useNuxtApp();
+const { data } = $useGql2('getProducts');
 const productsInCategory = (data.value?.products?.nodes || []) as Product[];
 setProducts(productsInCategory);
 
