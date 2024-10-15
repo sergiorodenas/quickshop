@@ -13,14 +13,14 @@ export function useCart() {
   const isUpdatingCoupon = useState<boolean>('isUpdatingCoupon', () => false);
   const paymentGateways = useState<PaymentGateways | null>('paymentGateways', () => null);
   const { logGQLError, clearAllCookies } = useHelpers();
-
   /** Refesh the cart from the server
    * @returns {Promise<boolean>} - A promise that resolves
    * to true if the cart was successfully refreshed
    */
   async function refreshCart(): Promise<boolean> {
     try {
-      const { cart, customer, viewer, paymentGateways } = await GqlGetCart();
+      const nuxtApp = useNuxtApp();
+      const { cart, customer, viewer, paymentGateways } = nuxtApp.$useGql2('getCart').data;
       const { updateCustomer, updateViewer } = useAuth();
 
       if (cart) updateCart(cart);
@@ -61,7 +61,9 @@ export function useCart() {
     isUpdatingCart.value = true;
 
     try {
-      const { addToCart } = await GqlAddToCart({ input });
+      // const { addToCart } = await GqlAddToCart({ input });
+      const nuxtApp = useNuxtApp();
+      const { addToCart } = nuxtApp.$useGql2('addToCart').data;
       if (addToCart?.cart) cart.value = addToCart.cart;
       // Auto open the cart when an item is added to the cart if the setting is enabled
       const { storeSettings } = useAppConfig();
