@@ -8,12 +8,9 @@ const { arraysEqual, formatArray, checkForVariationTypeOfAny } = useHelpers();
 const { addToCart, isUpdatingCart } = useCart();
 const { t } = useI18n();
 const slug = route.params.slug as string;
-const  { $useGql2 }  = useNuxtApp();
-
-
 //const { data } = await useAsyncGql('getProduct', { slug });
-
-const { data } = $useGql2("getProduct");
+const { $useGql2 } = useNuxtApp();
+const { data } = $useGql2("getProduct", { slug });
 
 
 if (!data.value?.product) {
@@ -92,23 +89,21 @@ const disabledAddToCart = computed(() => {
       <Breadcrumb :product class="mb-6" v-if="storeSettings.showBreadcrumbOnSingleProduct" />
 
       <div class="flex flex-col gap-10 md:flex-row md:justify-between lg:gap-24">
-        <ProductImageGallery
-          v-if="product.image"
-          class="relative flex-1"
-          :main-image="product.image"
-          :gallery="product.galleryImages!"
-          :node="type"
-          :activeVariation="activeVariation || {}" />
-        <NuxtImg v-else class="relative flex-1 skeleton" src="/images/placeholder.jpg" :alt="product?.name || 'Product'" />
+        <ProductImageGallery v-if="product.image" class="relative flex-1" :main-image="product.image"
+          :gallery="product.galleryImages!" :node="type" :activeVariation="activeVariation || {}" />
+        <NuxtImg v-else class="relative flex-1 skeleton" src="/images/placeholder.jpg"
+          :alt="product?.name || 'Product'" />
 
         <div class="lg:max-w-md xl:max-w-lg md:py-2 w-full">
           <div class="flex justify-between mb-4">
             <div class="flex-1">
               <h1 class="flex flex-wrap items-center gap-2 mb-2 text-2xl font-sesmibold">
                 {{ type.name }}
-                <LazyWPAdminLink :link="`/wp-admin/post.php?post=${product.databaseId}&action=edit`">Edit</LazyWPAdminLink>
+                <LazyWPAdminLink :link="`/wp-admin/post.php?post=${product.databaseId}&action=edit`">Edit
+                </LazyWPAdminLink>
               </h1>
-              <StarRating :rating="product.averageRating || 0" :count="product.reviewCount || 0" v-if="storeSettings.showReviews" />
+              <StarRating :rating="product.averageRating || 0" :count="product.reviewCount || 0"
+                v-if="storeSettings.showReviews" />
             </div>
             <ProductPrice class="text-xl" :sale-price="type.salePrice" :regular-price="type.regularPrice" />
           </div>
@@ -129,28 +124,17 @@ const disabledAddToCart = computed(() => {
           <hr />
 
           <form @submit.prevent="addToCart(selectProductInput)">
-            <AttributeSelections
-              v-if="isVariableProduct && product.attributes && product.variations"
-              class="mt-4 mb-8"
-              :attributes="product.attributes.nodes"
-              :defaultAttributes="product.defaultAttributes"
-              :variations="product.variations.nodes"
-              @attrs-changed="updateSelectedVariations" />
-            <div
-              v-if="isVariableProduct || isSimpleProduct"
+            <AttributeSelections v-if="isVariableProduct && product.attributes && product.variations" class="mt-4 mb-8"
+              :attributes="product.attributes.nodes" :defaultAttributes="product.defaultAttributes"
+              :variations="product.variations.nodes" @attrs-changed="updateSelectedVariations" />
+            <div v-if="isVariableProduct || isSimpleProduct"
               class="fixed bottom-0 left-0 z-10 flex items-center w-full gap-4 p-4 mt-12 bg-white md:static md:bg-transparent bg-opacity-90 md:p-0">
-              <input
-                v-model="quantity"
-                type="number"
-                min="1"
-                aria-label="Quantity"
+              <input v-model="quantity" type="number" min="1" aria-label="Quantity"
                 class="bg-white border rounded-lg flex text-left p-2.5 w-20 gap-4 items-center justify-center focus:outline-none" />
-              <AddToCartButton class="flex-1 w-full md:max-w-xs" :disabled="disabledAddToCart" :class="{ loading: isUpdatingCart }" />
+              <AddToCartButton class="flex-1 w-full md:max-w-xs" :disabled="disabledAddToCart"
+                :class="{ loading: isUpdatingCart }" />
             </div>
-            <a
-              v-if="isExternalProduct && product.externalUrl"
-              :href="product.externalUrl"
-              target="_blank"
+            <a v-if="isExternalProduct && product.externalUrl" :href="product.externalUrl" target="_blank"
               class="rounded-lg flex font-bold bg-gray-800 text-white text-center min-w-[150px] p-2.5 gap-4 items-center justify-center focus:outline-none">
               {{ product?.buttonText || 'View product' }}
             </a>
@@ -161,13 +145,9 @@ const disabledAddToCart = computed(() => {
               <div class="flex items-center gap-2">
                 <span class="text-gray-400">{{ $t('messages.shop.category', 2) }}:</span>
                 <div class="product-categories">
-                  <NuxtLink
-                    v-for="category in product.productCategories.nodes"
-                    :key="category.slug"
-                    :to="`/product-category/${decodeURIComponent(category.slug)}`"
-                    class="hover:text-primary"
-                    :title="category.name"
-                    >{{ category.name }}<span class="comma">, </span>
+                  <NuxtLink v-for="category in product.productCategories.nodes" :key="category.slug"
+                    :to="`/product-category/${decodeURIComponent(category.slug)}`" class="hover:text-primary"
+                    :title="category.name">{{ category.name }}<span class="comma">, </span>
                   </NuxtLink>
                 </div>
               </div>
@@ -193,7 +173,7 @@ const disabledAddToCart = computed(() => {
 </template>
 
 <style scoped>
-.product-categories > a:last-child .comma {
+.product-categories>a:last-child .comma {
   display: none;
 }
 

@@ -1,0 +1,100 @@
+{
+    "data": {
+        "addToCart": {
+            "cart": {
+                "total": "\u20ac28.00",
+                "rawTotal": "28.00",
+                "subtotal": "\u20ac18.00",
+                "totalTax": "\u20ac0.00",
+                "discountTotal": "\u20ac0.00",
+                "rawDiscountTotal": "0",
+                "shippingTotal": "\u20ac10.00",
+                "chosenShippingMethods": [
+                    "flat_rate:2"
+                ],
+                "availableShippingMethods": [
+                    {
+                        "rates": [
+                            {
+                                "cost": "10.00",
+                                "id": "flat_rate:2",
+                                "label": "Standard Shipping"
+                            },
+                            {
+                                "cost": "25.00",
+                                "id": "flat_rate:3",
+                                "label": "Express Shipping"
+                            }
+                        ]
+                    }
+                ],
+                "appliedCoupons": null,
+                "isEmpty": false,
+                "contents": {
+                    "itemCount": 1,
+                    "productCount": 1,
+                    "nodes": [
+                        {
+                            "quantity": 1,
+                            "key": "e49b8b4053df9505e1f48c3a701c0682",
+                            "product": {
+                                "node": {
+                                    "name": "Woo Logo",
+                                    "slug": "woo-logo-3",
+                                    "sku": "T-SHIRT-WOO-LOGO",
+                                    "databaseId": 748,
+                                    "type": "SIMPLE",
+                                    "price": "\u20ac18.00",
+                                    "rawPrice": "18",
+                                    "date": "2023-10-29T11:11:31+00:00",
+                                    "regularPrice": "\u20ac20.00",
+                                    "rawRegularPrice": "20",
+                                    "salePrice": "\u20ac18.00",
+                                    "rawSalePrice": "18",
+                                    "stockStatus": "IN_STOCK",
+                                    "stockQuantity": 14,
+                                    "lowStockAmount": 5,
+                                    "averageRating": 0,
+                                    "weight": null,
+                                    "length": null,
+                                    "width": null,
+                                    "height": null,
+                                    "reviewCount": 0,
+                                    "onSale": true,
+                                    "virtual": false,
+                                    "image": {
+                                        "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/T_1_front.jpg",
+                                        "altText": "",
+                                        "title": "T_1_front.jpg",
+                                        "databaseId": 820,
+                                        "cartSourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/T_1_front-150x150.jpg",
+                                        "producCardSourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/T_1_front-500x500.jpg"
+                                    },
+                                    "galleryImages": {
+                                        "nodes": [
+                                            {
+                                                "sourceUrl": "https:\/\/secure.woonuxt.com\/wp-content\/uploads\/2021\/10\/T_1_back.jpg",
+                                                "altText": "",
+                                                "title": "T_1_back.jpg",
+                                                "databaseId": 821
+                                            }
+                                        ]
+                                    }
+                                }
+                            },
+                            "variation": null
+                        }
+                    ]
+                }
+            }
+        }
+    },
+    "extensions": {
+        "debug": [
+            {
+                "type": "DEBUG_LOGS_INACTIVE",
+                "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+            }
+        ]
+    }
+}

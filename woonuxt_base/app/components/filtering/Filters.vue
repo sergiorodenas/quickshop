@@ -11,8 +11,10 @@ const { hideCategories } = defineProps({ hideCategories: { type: Boolean, defaul
 
 const globalProductAttributes = (runtimeConfig?.public?.GLOBAL_PRODUCT_ATTRIBUTES as WooNuxtFilter[]) || [];
 const taxonomies = globalProductAttributes.map((attr) => attr?.slug?.toUpperCase().replace('_', '')) as TaxonomyEnum[];
-const { data } = await useAsyncGql('getAllTerms', { taxonomies: [...taxonomies, TaxonomyEnum.PRODUCTCATEGORY] });
-const terms = data.value?.terms?.nodes || [];
+// const { data } = await useAsyncGql('getAllTerms', { taxonomies: [...taxonomies, TaxonomyEnum.PRODUCTCATEGORY] });
+const nuxtApp = useNuxtApp();
+const { data } = nuxtApp.$useGql2('getAllTerms').data;
+const terms = data?.value?.terms?.nodes || [];
 
 // Filter out the product category terms and the global product attributes with their terms
 const productCategoryTerms = terms.filter((term) => term.taxonomyName === 'product_cat');
@@ -36,13 +38,15 @@ const attributesWithTerms = globalProductAttributes.map((attr) => ({ ...attr, te
       <LazyResetFiltersButton v-if="isFiltersActive" />
     </div>
   </aside>
-  <div class="fixed inset-0 z-50 hidden bg-black opacity-25 filter-overlay" @click="removeBodyClass('show-filters')"></div>
+  <div class="fixed inset-0 z-50 hidden bg-black opacity-25 filter-overlay" @click="removeBodyClass('show-filters')">
+  </div>
 </template>
 
 <style lang="postcss">
 .show-filters .filter-overlay {
   @apply block;
 }
+
 .show-filters {
   overflow: hidden;
 }
@@ -106,13 +110,13 @@ const attributesWithTerms = globalProductAttributes.map((attr) => ({ ...attr, te
   }
 
   input[type='checkbox']:checked:after,
-  input[type='checkbox'] + label,
-  input[type='radio'] + label {
+  input[type='checkbox']+label,
+  input[type='radio']+label {
     @apply cursor-pointer text-gray-600 hover:text-primary;
   }
 
-  input[type='checkbox']:checked + label,
-  input[type='radio']:checked + label {
+  input[type='checkbox']:checked+label,
+  input[type='radio']:checked+label {
     @apply text-gray-800 hover:text-primary-dark;
   }
 

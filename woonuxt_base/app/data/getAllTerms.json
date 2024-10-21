@@ -1,0 +1,150 @@
+{
+  "data": {
+    "value": {
+      "terms": {
+        "nodes": [
+          {
+            "taxonomyName": "product_cat",
+            "name": "Accessories",
+            "slug": "accessories",
+            "count": 5
+          },
+          {
+            "taxonomyName": "product_cat",
+            "name": "Albums",
+            "slug": "albums",
+            "count": 6
+          },
+          {
+            "taxonomyName": "pa_color",
+            "name": "Black",
+            "slug": "black",
+            "count": 2
+          },
+          {
+            "taxonomyName": "pa_color",
+            "name": "Blue",
+            "slug": "blue",
+            "count": 5
+          },
+          {
+            "taxonomyName": "product_cat",
+            "name": "Clothing",
+            "slug": "clothing",
+            "count": 12
+          },
+          {
+            "taxonomyName": "product_cat",
+            "name": "Decor",
+            "slug": "decor",
+            "count": 1
+          },
+          {
+            "taxonomyName": "pa_color",
+            "name": "Gray",
+            "slug": "gray",
+            "count": 3
+          },
+          {
+            "taxonomyName": "pa_color",
+            "name": "Green",
+            "slug": "green",
+            "count": 5
+          },
+          {
+            "taxonomyName": "product_cat",
+            "name": "Hoodies",
+            "slug": "hoodies-clothing",
+            "count": 9
+          },
+          {
+            "taxonomyName": "pa_size",
+            "name": "Large",
+            "slug": "large",
+            "count": 2
+          },
+          {
+            "taxonomyName": "pa_range",
+            "name": "Long",
+            "slug": "long",
+            "count": 1
+          },
+          {
+            "taxonomyName": "pa_size",
+            "name": "Medium",
+            "slug": "medium",
+            "count": 2
+          },
+          {
+            "taxonomyName": "product_cat",
+            "name": "Music",
+            "slug": "music",
+            "count": 9
+          },
+          {
+            "taxonomyName": "pa_color",
+            "name": "Orange",
+            "slug": "orange",
+            "count": 1
+          },
+          {
+            "taxonomyName": "product_cat",
+            "name": "Posters",
+            "slug": "posters",
+            "count": 5
+          },
+          {
+            "taxonomyName": "pa_color",
+            "name": "Red",
+            "slug": "red",
+            "count": 6
+          },
+          {
+            "taxonomyName": "pa_range",
+            "name": "Short",
+            "slug": "short",
+            "count": 1
+          },
+          {
+            "taxonomyName": "pa_size",
+            "name": "Small",
+            "slug": "small",
+            "count": 2
+          },
+          {
+            "taxonomyName": "product_cat",
+            "name": "T-shirts",
+            "slug": "t-shirts",
+            "count": 10
+          },
+          {
+            "taxonomyName": "pa_size",
+            "name": "XL",
+            "slug": "xl",
+            "count": 1
+          },
+          {
+            "taxonomyName": "pa_size",
+            "name": "XXL",
+            "slug": "xxl",
+            "count": 1
+          },
+          {
+            "taxonomyName": "pa_color",
+            "name": "Yellow",
+            "slug": "yellow",
+            "count": 1
+          }
+        ]
+      }
+    }
+  },
+  "extensions": {
+    "debug": [
+      {
+        "type": "DEBUG_LOGS_INACTIVE",
+        "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+      }
+    ]
+  }
+}

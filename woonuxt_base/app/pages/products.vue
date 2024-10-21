@@ -6,7 +6,6 @@ const { isQueryEmpty } = useHelpers();
 const { $useGql2 } = useNuxtApp();
 
 const { data } = $useGql2('getProducts');
-console.log(data);
 const allProducts = (data.value?.products?.nodes || []) as Product[];
 setProducts(allProducts);
 
