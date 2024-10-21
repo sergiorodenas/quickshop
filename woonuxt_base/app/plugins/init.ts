@@ -1,12 +1,5 @@
-import dataJson from '../data/product.json';
-import stockData from '../data/stockStatus.json';
-import getProducts from '../data/getProducts.json';
-import getProductsCategories from '../data/getProductsCategories.json';
-import getCart from '../data/getCart.json';
-import getAllTerms from '../data/getAllTerms.json';
-import addToCart from '../data/addToCart.json';
-
 export default defineNuxtPlugin(async (nuxtApp) => {
+  
   if (!import.meta.env.SSR) {
     const { storeSettings } = useAppConfig();
     const { clearAllCookies, clearAllLocalStorage } = useHelpers();
@@ -17,6 +10,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
     let initialised = false;
     const eventsToFireOn = ['mousedown', 'keydown', 'touchstart', 'scroll', 'wheel', 'click', 'resize', 'mousemove', 'mouseover'];
 
+
     async function initStore() {
       if (initialised) {
         // We only want to execute this code block once, so we return if initialised is truthy and remove the event listeners
@@ -25,35 +19,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         });
         return;
       }
-
-      const useGql2 = (methodName: string, params) => {
-        console.log('useGql2:', params);
-        switch (methodName) {
-          case 'getProduct':
-            // return getProducts.data.value.products.nodes.find((product) => product.slug === params.slug);
-            return dataJson;
-          case 'getProducts':
-            return getProducts;
-          case 'getStockStatus':
-            return stockData;
-          case 'getProductCategories':
-            return getProductsCategories;
-          case 'getCart':
-            return getCart;
-          case 'getAllTerms':
-            return getAllTerms;
-          case 'addToCart':
-            console.log('addTocart');
-            return addToCart;
-
-          default:
-            return 'Method not found';
-        }
-      };
-
-      nuxtApp.provide('useGql2', useGql2);
-
-      initialised = true;
+        initialised = true;
 
       const { refreshCart } = useCart();
       const success: boolean = await refreshCart();
@@ -80,8 +46,8 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         }
 
         // Log out the user
-        const { logoutUser } = useAuth();
-        await logoutUser();
+        // const { logoutUser } = useAuth();
+        // await logoutUser();
 
         if (!reloadCount.value) window.location.reload();
       }
