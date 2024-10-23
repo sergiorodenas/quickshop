@@ -21,7 +21,6 @@ export function useCart() {
 
   async function refreshCart(): Promise<boolean> {
     try {
-      const nuxtApp = useNuxtApp();
       const { cart, customer, viewer, paymentGateways } = nuxtApp.$useGql2('getCart').data;
       const { updateCustomer, updateViewer } = useAuth();
 
@@ -59,12 +58,12 @@ export function useCart() {
   }
 
   // add an item to the cart
-  async function addToCart(input: AddToCartInput): Promise<void> {
+  async function addToCart(input: any): Promise<void> {
     isUpdatingCart.value = true;
 
     try {
       // const { addToCart } = await GqlAddToCart({ input });
-      const nuxtApp = useNuxtApp();
+      
       const { addToCart } = nuxtApp.$useGql2('addToCart').data;
       if (addToCart?.cart) cart.value = addToCart.cart;
       // Auto open the cart when an item is added to the cart if the setting is enabled
