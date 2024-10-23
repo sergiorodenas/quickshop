@@ -17,6 +17,8 @@ export function useCart() {
    * @returns {Promise<boolean>} - A promise that resolves
    * to true if the cart was successfully refreshed
    */
+  const nuxtApp = useNuxtApp();
+
   async function refreshCart(): Promise<boolean> {
     try {
       const nuxtApp = useNuxtApp();
