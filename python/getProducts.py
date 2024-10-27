@@ -28,9 +28,21 @@ def get_formatted_products():
             "description": product.get("description"),
             "rawDescription": product.get("description"),
             "shortDescription": product.get("description"),
-            "attributes": {"nodes": []},
-            "productCategories": {"nodes": []},
-            "terms": {"nodes": []},
+            #"attributes": {"nodes": []},
+            "productCategories": {"nodes": [
+                {
+                  "databaseId": 30,
+                  "slug": "clothing",
+                  "name": "Clothing",
+                  "count": 12
+                }
+            ]},
+            "terms": {"nodes": [
+                {
+                  "taxonomyName": "product_cat",
+                  "slug": "clothing"
+                },
+            ]},
             "price": price,
             "rawPrice": float(price_data.unit_amount) / 100 if price_data else 0,
             "currency": currency,
