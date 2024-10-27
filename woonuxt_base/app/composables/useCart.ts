@@ -77,7 +77,8 @@ export function useCart() {
   // remove an item from the cart
   async function removeItem(key: string) {
     isUpdatingCart.value = true;
-    const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity: 0 });
+    //const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity: 0 });
+    const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', {key, quantity: 0}).data;
     updateCart(updateItemQuantities?.cart);
   }
 
@@ -85,7 +86,8 @@ export function useCart() {
   async function updateItemQuantity(key: string, quantity: number): Promise<void> {
     isUpdatingCart.value = true;
     try {
-      const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity });
+      //const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity });
+      const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', {key, quantity}).data;
       updateCart(updateItemQuantities?.cart);
     } catch (error: any) {
       logGQLError(error);
@@ -96,7 +98,8 @@ export function useCart() {
   async function emptyCart(): Promise<void> {
     try {
       isUpdatingCart.value = true;
-      const { emptyCart } = await GqlEmptyCart();
+      //const { emptyCart } = await GqlEmptyCart();
+      const { emptyCart } = nuxtApp.$useGql2('emptyCart').data;
       updateCart(emptyCart?.cart);
     } catch (error: any) {
       logGQLError(error);

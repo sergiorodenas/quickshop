@@ -1,0 +1,32 @@
+{
+    "data": {
+        "updateItemQuantities": {
+            "cart": {
+                "total": "€0.00",
+                "rawTotal": "0",
+                "subtotal": "€0.00",
+                "totalTax": "€0.00",
+                "discountTotal": "€0.00",
+                "rawDiscountTotal": "0",
+                "shippingTotal": "€0.00",
+                "chosenShippingMethods": [],
+                "availableShippingMethods": [],
+                "appliedCoupons": null,
+                "isEmpty": true,
+                "contents": {
+                    "itemCount": 0,
+                    "productCount": 0,
+                    "nodes": []
+                }
+            }
+        }
+    },
+    "extensions": {
+        "debug": [
+            {
+                "type": "DEBUG_LOGS_INACTIVE",
+                "message": "GraphQL Debug logging is not active. To see debug logs, GRAPHQL_DEBUG must be enabled."
+            }
+        ]
+    }
+}
