@@ -5,6 +5,7 @@
 name: Deploy Nuxt site to Pages
 
 env:
+  GQL_HOST: ${{ secrets.GQL_HOST }}
   STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
 
 on:
