@@ -68,7 +68,7 @@ def get_formatted_products():
     
     return formatted_products
 
-def save_to_json(data, filename="woonuxt_base/app/data/products.json"):
+def save_to_json(data, filename="woonuxt_base/app/data/getProducts.json"):
     json_data = {
         "data": {
             "value": {
