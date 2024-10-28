@@ -42,7 +42,7 @@ const mergeLiveStockStatus = (payload: Product): void => {
 onMounted(async () => {
   try {
     //const { product } = await GqlGetStockStatus({ slug });
-    const { data } = $useGql2('getStockStatus');
+    const { data } = $useGql2('getStockStatus',{ slug });
     const { product } = data;
     if (product) mergeLiveStockStatus(product as Product);
   } catch (error: any) {
