@@ -19,7 +19,7 @@ def get_formatted_products():
         
         formatted_product = {
             "name": product.get("name"),
-            "type": product.get("type", "SIMPLE"),
+            "type": "SIMPLE",
             "databaseId": product.get("id"),
             "id": product.get("id"),
             "metaData": [],
