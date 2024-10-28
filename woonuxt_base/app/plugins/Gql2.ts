@@ -14,11 +14,10 @@ export default defineNuxtPlugin(() => {
                 console.log('useGql2:', params, methodName);
                 switch (methodName) {
                     case 'getProduct':
-                        let product = getProducts.data.value.products.nodes.find((product) => product.slug === params.slug);
                         return {
                             "data": {
                                 "value": {
-                                    "product": product
+                                    "product": getProducts.data.value.products.nodes.find((product) => product.slug === params.slug)
                                 }
                             }                      
                         };
@@ -27,7 +26,13 @@ export default defineNuxtPlugin(() => {
                         return getProducts;
 
                     case 'getStockStatus':
-                        return stockData;
+                        return {
+                            "data": {
+                                "product": {
+                                    "stockStatus": getProducts.data.value.products.nodes.find((product) => product.slug === params.slug)?.stockStatus ?? 'IN_STOCK'
+                                }
+                            }
+                        };
 
                     case 'getProductCategories':
                         return getProductsCategories;
