@@ -10,7 +10,7 @@ export default defineNuxtPlugin(() => {
   return {
     provide: {
       useGql2: (methodName: string, params: any) => {
-        console.log('useGql2:', params, methodName);
+        console.log('useGql2:', methodName, params);
         switch (methodName) {
           case 'getProduct':
             return {
@@ -43,11 +43,9 @@ export default defineNuxtPlugin(() => {
             return getAllTerms;
 
           case 'addToCart':
-            console.log('addTocart', params);
             return addToCart;
 
           case 'updateCartQuantity':
-            console.log('updateCartQuantity', params);
             return updateCartQuantity;
 
           case 'emptyCart':
