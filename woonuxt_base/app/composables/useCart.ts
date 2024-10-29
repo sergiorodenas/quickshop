@@ -63,8 +63,8 @@ export function useCart() {
 
     try {
       // const { addToCart } = await GqlAddToCart({ input });
-      
-      const { addToCart } = nuxtApp.$useGql2('addToCart').data;
+
+      const { addToCart } = nuxtApp.$useGql2('addToCart', { input }).data;
       if (addToCart?.cart) cart.value = addToCart.cart;
       // Auto open the cart when an item is added to the cart if the setting is enabled
       const { storeSettings } = useAppConfig();
@@ -78,7 +78,7 @@ export function useCart() {
   async function removeItem(key: string) {
     isUpdatingCart.value = true;
     //const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity: 0 });
-    const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', {key, quantity: 0}).data;
+    const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity: 0 }).data;
     updateCart(updateItemQuantities?.cart);
   }
 
@@ -87,7 +87,7 @@ export function useCart() {
     isUpdatingCart.value = true;
     try {
       //const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity });
-      const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', {key, quantity}).data;
+      const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity }).data;
       updateCart(updateItemQuantities?.cart);
     } catch (error: any) {
       logGQLError(error);
