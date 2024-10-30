@@ -4,8 +4,72 @@
             "products": {
                 "nodes": [
                     {
+                        "name": "Gorro",
+                        "type": "SIMPLE",
+                        "databaseId": "prod_R74G0GwMW6JlWM",
+                        "id": "prod_R74G0GwMW6JlWM",
+                        "metaData": [],
+                        "slug": "gorro",
+                        "sku": null,
+                        "description": "Esto es para que Matias vea que funciona",
+                        "rawDescription": "Esto es para que Matias vea que funciona",
+                        "shortDescription": "Esto es para que Matias vea que funciona",
+                        "productCategories": {
+                            "nodes": [
+                                {
+                                    "databaseId": 30,
+                                    "slug": "clothing",
+                                    "name": "Clothing",
+                                    "count": 12
+                                }
+                            ]
+                        },
+                        "terms": {
+                            "nodes": [
+                                {
+                                    "taxonomyName": "product_cat",
+                                    "slug": "clothing"
+                                }
+                            ]
+                        },
+                        "price": "€75.0",
+                        "rawPrice": 75.0,
+                        "currency": "EUR",
+                        "date": 1730111082,
+                        "stockStatus": "IN_STOCK",
+                        "stockQuantity": null,
+                        "lowStockAmount": null,
+                        "averageRating": 0,
+                        "weight": null,
+                        "length": null,
+                        "width": null,
+                        "height": null,
+                        "reviewCount": 0,
+                        "onSale": false,
+                        "virtual": false,
+                        "image": {
+                            "sourceUrl": "https://files.stripe.com/links/MDB8YWNjdF8xQTR0SmdFa1F6WmJsVkpIfGZsX2xpdmVfUm9DNlRlNWEydmxUdEhCYzRRTExGbndZ00dhZ0EQzd",
+                            "altText": "",
+                            "title": "Gorro",
+                            "databaseId": "prod_R74G0GwMW6JlWM",
+                            "cartSourceUrl": "https://files.stripe.com/links/MDB8YWNjdF8xQTR0SmdFa1F6WmJsVkpIfGZsX2xpdmVfUm9DNlRlNWEydmxUdEhCYzRRTExGbndZ00dhZ0EQzd",
+                            "producCardSourceUrl": "https://files.stripe.com/links/MDB8YWNjdF8xQTR0SmdFa1F6WmJsVkpIfGZsX2xpdmVfUm9DNlRlNWEydmxUdEhCYzRRTExGbndZ00dhZ0EQzd"
+                        },
+                        "galleryImages": {
+                            "nodes": [
+                                {
+                                    "sourceUrl": "https://files.stripe.com/links/MDB8YWNjdF8xQTR0SmdFa1F6WmJsVkpIfGZsX2xpdmVfUm9DNlRlNWEydmxUdEhCYzRRTExGbndZ00dhZ0EQzd"
+                                }
+                            ]
+                        },
+                        "reviews": {
+                            "averageRating": 0,
+                            "edges": []
+                        }
+                    },
+                    {
                         "name": "Pasiflora",
-                        "type": "service",
+                        "type": "SIMPLE",
                         "databaseId": "prod_QopjKVduGKo5Ru",
                         "id": "prod_QopjKVduGKo5Ru",
                         "metaData": [],
@@ -69,7 +133,7 @@
                     },
                     {
                         "name": "Inmunit 20 viales",
-                        "type": "service",
+                        "type": "SIMPLE",
                         "databaseId": "prod_Qngp3xenYB5BFy",
                         "id": "prod_Qngp3xenYB5BFy",
                         "metaData": [],
