@@ -49,7 +49,6 @@ export default defineNuxtPlugin(() => {
             return updateCartQuantity;
 
           case 'emptyCart':
-            console.log('Empty cart');
             return emptyCart;
 
           default:
