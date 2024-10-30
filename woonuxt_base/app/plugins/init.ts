@@ -19,7 +19,7 @@ export default defineNuxtPlugin(async (nuxtApp) => {
         });
         return;
       }
-        initialised = true;
+      initialised = true;
 
       const { refreshCart } = useCart();
       const success: boolean = await refreshCart();
@@ -62,12 +62,14 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
     const shouldInit = isDev || isPathThatRequiresInit || !storeSettings.initStoreOnUserActionToReduceServerLoad;
 
-    if (shouldInit) {
-      initStore();
-    } else {
-      eventsToFireOn.forEach((event) => {
-        window.addEventListener(event, initStore, { once: true });
-      });
-    }
+    onNuxtReady(() => {
+      if (shouldInit) {
+        initStore();
+      } else {
+        eventsToFireOn.forEach((event) => {
+          window.addEventListener(event, initStore, { once: true });
+        });
+      }
+    });
   }
 });
