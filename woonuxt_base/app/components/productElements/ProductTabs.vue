@@ -12,11 +12,11 @@ const show = ref(initialTab);
   <div>
     <nav class="border-b flex gap-8 tabs">
       <button v-if="product.description" type="button" :class="show === 0 ? 'active' : ''" @click.prevent="show = 0">{{ $t('messages.shop.productDescription') }}</button>
-      <button v-if="storeSettings.showReviews" type="button" :class="show === 1 ? 'active' : ''" @click.prevent="show = 1">{{ $t('messages.shop.reviews') }} ({{ product.reviewCount }})</button>
+      <!-- <button v-if="storeSettings.showReviews" type="button" :class="show === 1 ? 'active' : ''" @click.prevent="show = 1">{{ $t('messages.shop.reviews') }} ({{ product.reviewCount }})</button> -->
     </nav>
     <div class="tab-contents">
       <div v-if="show === 0 && product.description" class="font-light mt-8 prose" v-html="product.description" />
-      <ProductReviews v-if="show === 1" :product="product" />
+      <!-- <ProductReviews v-if="show === 1" :product="product" /> -->
     </div>
   </div>
 </template>
