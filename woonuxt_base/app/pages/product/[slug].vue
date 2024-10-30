@@ -99,11 +99,11 @@ const disabledAddToCart = computed(() => {
             <div class="flex-1">
               <h1 class="flex flex-wrap items-center gap-2 mb-2 text-2xl font-sesmibold">
                 {{ type.name }}
-                <LazyWPAdminLink :link="`/wp-admin/post.php?post=${product.databaseId}&action=edit`">Edit
-                </LazyWPAdminLink>
+                <!-- <LazyWPAdminLink :link="`/wp-admin/post.php?post=${product.databaseId}&action=edit`">Edit
+                </LazyWPAdminLink> -->
               </h1>
-              <StarRating :rating="product.averageRating || 0" :count="product.reviewCount || 0"
-                v-if="storeSettings.showReviews" />
+              <!-- <StarRating :rating="product.averageRating || 0" :count="product.reviewCount || 0"
+                v-if="storeSettings.showReviews" /> -->
             </div>
             <ProductPrice class="text-xl" :sale-price="type.salePrice" :regular-price="type.regularPrice" />
           </div>
