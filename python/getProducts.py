@@ -43,8 +43,8 @@ def get_formatted_products():
                   "slug": "clothing"
                 },
             ]},
-            "price": price,
-            "rawPrice": float(price_data.unit_amount) / 100 if price_data else 0,
+            "regularPrice": price,
+            "rawRegularPrice": f"{float(price_data.unit_amount) / 100:.2f}" if price_data else "0.00",
             "currency": currency,
             "date": product.get("created"),
             "stockStatus": product.get("metadata", {}).get("stock_status", "IN_STOCK"),
