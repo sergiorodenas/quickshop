@@ -2,6 +2,7 @@
 import getCartJson from '../data/getCart.json';
 import addToCartJson from '../data/addToCart.json';
 import emptyCartJson from '../data/emptyCart.json';
+import productsJson from '../data/getProducts.json';
 /**
  * @name useCart
  * @description A composable that handles the cart in local storage
@@ -66,7 +67,10 @@ export function useCart() {
     isUpdatingCart.value = true;
 
     try {
-      // const { addToCart } = await GqlAddToCart({ input });
+      // const { addToCart } = await GqlAddToCart({ input })
+      const product = productsJson.data.value.products.nodes.find((product) => product.id === input.productId);
+      const oldCart = JSON.parse(localStorage.getItem('cart') as string);
+      console.log('oldCart', oldCart);
       const { addToCart } = addToCartJson.data;
       if (addToCart?.cart) cart.value = addToCart.cart;
       localStorage.setItem('cart', JSON.stringify(cart.value));
