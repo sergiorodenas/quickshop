@@ -32,8 +32,8 @@
                                 }
                             ]
                         },
-                        "price": "€75.0",
-                        "rawPrice": 75.0,
+                        "regularPrice": "€75.0",
+                        "rawRegularPrice": "75.00",
                         "currency": "EUR",
                         "date": 1730111082,
                         "stockStatus": "IN_STOCK",
@@ -96,8 +96,8 @@
                                 }
                             ]
                         },
-                        "price": "€10.0",
-                        "rawPrice": 10.0,
+                        "regularPrice": "€10.0",
+                        "rawRegularPrice": "10.00",
                         "currency": "EUR",
                         "date": 1725905508,
                         "stockStatus": "IN_STOCK",
@@ -160,8 +160,8 @@
                                 }
                             ]
                         },
-                        "price": "€30.0",
-                        "rawPrice": 30.0,
+                        "regularPrice": "€30.0",
+                        "rawRegularPrice": "30.00",
                         "currency": "EUR",
                         "date": 1725641750,
                         "stockStatus": "IN_STOCK",
