@@ -1,5 +1,7 @@
 //import type { AddToCartInput } from '#gql';
-
+import getCartJson from '../data/getCart.json';
+import addToCartJson from '../data/addToCart.json';
+import emptyCartJson from '../data/emptyCart.json';
 /**
  * @name useCart
  * @description A composable that handles the cart in local storage
@@ -17,11 +19,13 @@ export function useCart() {
    * @returns {Promise<boolean>} - A promise that resolves
    * to true if the cart was successfully refreshed
    */
-  const nuxtApp = useNuxtApp();
+  if (localStorage.getItem('cart') !== null) {
+    cart.value = JSON.parse(localStorage.getItem('cart') as string) as Cart;
+  }
 
   async function refreshCart(): Promise<boolean> {
     try {
-      const { cart, customer, viewer, paymentGateways } = nuxtApp.$useGql2('getCart').data;
+      const { cart, customer, viewer, paymentGateways } = getCartJson.data;
       const { updateCustomer, updateViewer } = useAuth();
 
       if (cart) updateCart(cart);
@@ -63,9 +67,9 @@ export function useCart() {
 
     try {
       // const { addToCart } = await GqlAddToCart({ input });
-
-      const { addToCart } = nuxtApp.$useGql2('addToCart', { input }).data;
+      const { addToCart } = addToCartJson.data;
       if (addToCart?.cart) cart.value = addToCart.cart;
+      localStorage.setItem('cart', JSON.stringify(cart.value));
       // Auto open the cart when an item is added to the cart if the setting is enabled
       const { storeSettings } = useAppConfig();
       if (storeSettings.autoOpenCart && !isShowingCart.value) toggleCart(true);
@@ -77,8 +81,8 @@ export function useCart() {
   // remove an item from the cart
   async function removeItem(key: string) {
     isUpdatingCart.value = true;
-    //const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity: 0 });
-    const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity: 0 }).data;
+    const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity: 0 });
+    // const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity: 0 }).data;
     updateCart(updateItemQuantities?.cart);
   }
 
@@ -86,8 +90,8 @@ export function useCart() {
   async function updateItemQuantity(key: string, quantity: number): Promise<void> {
     isUpdatingCart.value = true;
     try {
-      //const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity });
-      const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity }).data;
+      const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity });
+      // const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity }).data;
       updateCart(updateItemQuantities?.cart);
     } catch (error: any) {
       logGQLError(error);
@@ -98,8 +102,9 @@ export function useCart() {
   async function emptyCart(): Promise<void> {
     try {
       isUpdatingCart.value = true;
-      //const { emptyCart } = await GqlEmptyCart();
-      const { emptyCart } = nuxtApp.$useGql2('emptyCart').data;
+      // const { emptyCart } = await GqlEmptyCart();
+      const { emptyCart } = emptyCartJson.data;
+      localStorage.removeItem('cart');
       updateCart(emptyCart?.cart);
     } catch (error: any) {
       logGQLError(error);
