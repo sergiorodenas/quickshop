@@ -62,14 +62,12 @@ export default defineNuxtPlugin(async (nuxtApp) => {
 
     const shouldInit = isDev || isPathThatRequiresInit || !storeSettings.initStoreOnUserActionToReduceServerLoad;
 
-    onNuxtReady(() => {
-      if (shouldInit) {
-        initStore();
-      } else {
-        eventsToFireOn.forEach((event) => {
-          window.addEventListener(event, initStore, { once: true });
-        });
-      }
-    });
+    if (shouldInit) {
+      initStore();
+    } else {
+      eventsToFireOn.forEach((event) => {
+        window.addEventListener(event, initStore, { once: true });
+      });
+    }
   }
 });
