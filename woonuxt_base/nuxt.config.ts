@@ -32,6 +32,17 @@ export default defineNuxtConfig({
 
   modules: ['woonuxt-settings', 'nuxt-graphql-client', '@nuxtjs/tailwindcss', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n'],
 
+  image: {
+    provider: 'cloudflare',
+    presets: {
+      default: {
+        modifiers: {
+          fit: 'scale'
+        }
+      }
+    }
+  },
+
   'graphql-client': {
     clients: {
       default: {

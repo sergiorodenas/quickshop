@@ -1,0 +1,95 @@
+{
+  "logo": {
+    "url": "/images/logoipsum-211.svg",
+    "alt": "QuickShop Logo"
+  },
+  "hero": {
+    "backgroundImage": "/images/hero.jpeg",
+    "title": "Welcome to QuickShop",
+    "subtitle": "Your One-Stop Shopping Destination",
+    "description": "Discover our curated collection of premium products at unbeatable prices. Shop now and experience the difference.",
+    "link": {
+      "text": "Shop Now",
+      "url": "/products"
+    }
+  },
+  "features": [
+    {
+      "icon": "/icons/box.svg",
+      "title": "Free Shipping",
+      "description": "Free shipping on order over €50"
+    },
+    {
+      "icon": "/icons/moneyback.svg",
+      "title": "Peace of Mind",
+      "description": "30 days money back guarantee"
+    },
+    {
+      "icon": "/icons/secure.svg",
+      "title": "100% Payment Secure",
+      "description": "Your payment are safe with us."
+    },
+    {
+      "icon": "/icons/support.svg",
+      "title": "Support 24/7",
+      "description": "24/7 Online support"
+    }
+  ],
+  "brands": [
+    {
+      "name": "Brand 1",
+      "logo": "/images/logoipsum-211.svg"
+    },
+    {
+      "name": "Brand 2",
+      "logo": "/images/logoipsum-215.svg"
+    },
+    {
+      "name": "Brand 3",
+      "logo": "/images/logoipsum-221.svg"
+    },
+    {
+      "name": "Brand 4",
+      "logo": "/images/logoipsum-225.svg"
+    },
+    {
+      "name": "Brand 5",
+      "logo": "/images/logoipsum-280.svg"
+    },
+    {
+      "name": "Brand 6",
+      "logo": "/images/logoipsum-284.svg"
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Electronics",
+      "imageUrl": "/images/hero-2.jpeg",
+      "slug": "electronics"
+    },
+    {
+      "id": 2,
+      "name": "Fashion",
+      "imageUrl": "/images/hero-3.jpg",
+      "slug": "fashion"
+    },
+    {
+      "id": 3,
+      "name": "Home & Living",
+      "imageUrl": "/images/hero-4.jpg",
+      "slug": "home-living"
+    },
+    {
+      "id": 4,
+      "name": "Seasonal",
+      "imageUrl": "/images/hero-xmas.jpg",
+      "slug": "seasonal"
+    }
+  ],
+  "popularProducts": [
+    "prod_R74G0GwMW6JlWM",
+    "prod_QopjKVduGKo5Ru",
+    "prod_Qngp3xenYB5BFy"
+  ]
+}

@@ -1,18 +1,70 @@
 <script lang="ts" setup>
 import { ProductsOrderByEnum } from '#woo';
 const { siteName, description, shortDescription, siteImage } = useAppConfig();
-const { $useGql2 } = useNuxtApp();
-const { data } = $useGql2("getProductCategories");
 
-//const { data } = await useAsyncGql('getProductCategories', { first: 6 });
+interface Brand {
+  name: string;
+  logo: string;
+}
 
-const productCategories = data.value.productCategories.nodes.filter((elem, index) => index < 6) || [];
+interface Category {
+  id: number;
+  name: string;
+  imageUrl: string;
+  slug: string;
+}
 
-//const { data: productData } = await useAsyncGql('getProducts', { first: 5, orderby: ProductsOrderByEnum.POPULARITY });
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
 
-const productData = { value: data.value }
+interface ConfigData {
+  brands: Brand[];
+  categories: Category[];
+  features: Feature[];
+}
 
-const popularProducts = productData.value.products?.nodes.filter((elem, index) => index < 5) || [];
+interface Config {
+  default: ConfigData;
+}
+
+interface ProductNode {
+  name: string;
+  type: string;
+  databaseId: string;
+  id: string;
+  slug: string;
+  description: string;
+  shortDescription: string;
+  regularPrice: string;
+  image: {
+    sourceUrl: string;
+    altText: string;
+    title: string;
+  };
+  [key: string]: any;
+}
+
+interface GetProductsData {
+  data: {
+    value: {
+      products: {
+        nodes: ProductNode[];
+      };
+    };
+  };
+}
+
+const configData = await import('~/../../config.json') as Config;
+const { brands, categories, features } = configData.default;
+
+// Import products directly from getProducts.json
+const productsData = await import('../data/getProducts.json') as GetProductsData;
+const popularProducts = computed(() => 
+  productsData.data.value.products.nodes || []
+);
 
 useSeoMeta({
   title: `Home`,
@@ -30,12 +82,12 @@ useSeoMeta({
 
     <div
       class="container flex flex-wrap items-center justify-center my-16 text-center gap-x-8 gap-y-4 brand lg:justify-between">
-      <img src="/images/logoipsum-211.svg" alt="Brand 1" width="132" height="35" />
-      <img src="/images/logoipsum-221.svg" alt="Brand 2" width="119" height="30" />
-      <img src="/images/logoipsum-225.svg" alt="Brand 3" width="49" height="48" />
-      <img src="/images/logoipsum-280.svg" alt="Brand 4" width="78" height="30" />
-      <img src="/images/logoipsum-284.svg" alt="Brand 5" width="70" height="44" />
-      <img src="/images/logoipsum-215.svg" alt="Brand 6" width="132" height="40" />
+      <img v-for="brand in brands" 
+           :key="brand.name" 
+           :src="brand.logo" 
+           :alt="brand.name" 
+           width="132" 
+           height="35" />
     </div>
 
     <section class="container my-16">
@@ -43,43 +95,38 @@ useSeoMeta({
         <h2 class="text-lg font-semibold md:text-2xl">{{ $t('messages.shop.shopByCategory') }}</h2>
         <NuxtLink class="text-primary" to="/categories">{{ $t('messages.general.viewAll') }}</NuxtLink>
       </div>
-      <div class="grid justify-center grid-cols-2 gap-4 mt-8 md:grid-cols-3 lg:grid-cols-6">
-        <CategoryCard v-for="(category, i) in productCategories" :key="i" class="w-full" :node="category" />
+      <div class="grid justify-center grid-cols-2 gap-4 mt-8 md:grid-cols-3 lg:grid-cols-4">
+        <NuxtLink v-for="category in categories" 
+                 :key="category.id" 
+                 :to="`/product-category/${category.slug}`"
+                 class="relative overflow-hidden group rounded-xl">
+          <img :src="category.imageUrl" 
+               :alt="category.name"
+               class="object-cover w-full aspect-square transition-transform duration-300 group-hover:scale-110" />
+          <div class="absolute inset-0 flex items-center justify-center bg-black/30">
+            <h3 class="text-xl font-semibold text-white">{{ category.name }}</h3>
+          </div>
+        </NuxtLink>
       </div>
     </section>
 
     <section class="container grid gap-4 my-24 md:grid-cols-2 lg:grid-cols-4">
-      <div class="flex items-center gap-8 p-8 bg-white rounded-lg">
-        <img src="/icons/box.svg" width="60" height="60" alt="Free Shipping" loading="lazy" />
+      <div v-for="feature in features" 
+           :key="feature.title" 
+           class="flex items-center gap-8 p-8 bg-white rounded-lg">
+        <img :src="feature.icon" 
+             width="60" 
+             height="60" 
+             :alt="feature.title" 
+             loading="lazy" />
         <div>
-          <h3 class="text-xl font-semibold">Free Shipping</h3>
-          <p class="text-sm">Free shipping on order over €50</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-8 p-8 bg-white rounded-lg">
-        <img src="/icons/moneyback.svg" width="60" height="60" alt="Money Back" loading="lazy" />
-        <div>
-          <h3 class="text-xl font-semibold">Peace of Mind</h3>
-          <p class="text-sm">30 days money back guarantee</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-8 p-8 bg-white rounded-lg">
-        <img src="/icons/secure.svg" width="60" height="60" alt="Secure Payment" loading="lazy" />
-        <div>
-          <h3 class="text-xl font-semibold">100% Payment Secure</h3>
-          <p class="text-sm">Your payment are safe with us.</p>
-        </div>
-      </div>
-      <div class="flex items-center gap-8 p-8 bg-white rounded-lg">
-        <img src="/icons/support.svg" width="60" height="60" alt="Support 24/7" loading="lazy" />
-        <div>
-          <h3 class="text-xl font-semibold">Support 24/7</h3>
-          <p class="text-sm">24/7 Online support</p>
+          <h3 class="text-xl font-semibold">{{ feature.title }}</h3>
+          <p class="text-sm">{{ feature.description }}</p>
         </div>
       </div>
     </section>
 
-    <section class="container my-16" v-if="popularProducts">
+    <section class="container my-16" v-if="popularProducts.length">
       <div class="flex items-end justify-between">
         <h2 class="text-lg font-semibold md:text-2xl">{{ $t('messages.shop.popularProducts') }}</h2>
         <NuxtLink class="text-primary" to="/products">{{ $t('messages.general.viewAll') }}</NuxtLink>

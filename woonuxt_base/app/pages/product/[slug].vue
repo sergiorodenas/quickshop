@@ -1,6 +1,72 @@
 <script lang="ts" setup>
 import { StockStatusEnum, ProductTypesEnum, type AddToCartInput } from '#woo';
 
+interface ProductImage {
+  sourceUrl: string;
+  altText: string;
+  title: string;
+  databaseId: string;
+  cartSourceUrl: string;
+  producCardSourceUrl: string;
+}
+
+interface ProductCategory {
+  databaseId: number;
+  slug: string;
+  name: string;
+  count: number;
+}
+
+interface ProductNode {
+  name: string;
+  type: ProductTypesEnum;
+  databaseId: number;
+  id: string;
+  slug: string;
+  sku: string | null;
+  description: string;
+  shortDescription: string;
+  regularPrice: string;
+  salePrice?: string;
+  stockStatus: StockStatusEnum;
+  productCategories?: {
+    nodes: ProductCategory[];
+  };
+  image: ProductImage;
+  galleryImages?: {
+    nodes: { sourceUrl: string }[];
+  };
+  variations?: {
+    nodes: Variation[];
+  };
+  attributes?: {
+    nodes: VariationAttribute[];
+  };
+  defaultAttributes?: VariationAttribute[];
+  related?: {
+    nodes: ProductNode[];
+  };
+  reviews?: any;
+  externalUrl?: string;
+  buttonText?: string;
+}
+
+interface Variation {
+  databaseId: number;
+  name: string;
+  stockStatus: StockStatusEnum;
+  attributes?: {
+    nodes: VariationAttribute[];
+  };
+  [key: string]: any;
+}
+
+interface VariationAttribute {
+  name: string;
+  value: string;
+}
+
+type Product = ProductNode;
 
 const route = useRoute();
 const { storeSettings } = useAppConfig();
@@ -8,15 +74,26 @@ const { arraysEqual, formatArray, checkForVariationTypeOfAny } = useHelpers();
 const { addToCart, isUpdatingCart } = useCart();
 const { t } = useI18n();
 const slug = route.params.slug as string;
-//const { data } = await useAsyncGql('getProduct', { slug });
-const { $useGql2 } = useNuxtApp();
-const { data } = $useGql2("getProduct", { slug });
 
+// Import product data from JSON
+const productData = await import('../../data/product.json');
+const productValue = productData.data.value.product;
+
+// Convert string type to enum
+const mappedProduct = {
+  ...productValue,
+  type: productValue.type as ProductTypesEnum,
+  stockStatus: productValue.stockStatus as StockStatusEnum,
+  databaseId: Number(productValue.databaseId)
+};
+
+const data = ref({ value: { product: mappedProduct } });
 
 if (!data.value?.product) {
   throw showError({ statusCode: 404, statusMessage: t('messages.shop.productNotFound') });
 }
-const product = ref<Product>(data?.value?.product);
+
+const product = ref<Product>(data.value.product);
 const quantity = ref<number>(1);
 const activeVariation = ref<Variation | null>(null);
 const variation = ref<VariationAttribute[]>([]);
@@ -27,10 +104,15 @@ const isVariableProduct = computed<boolean>(() => product.value?.type === Produc
 const isExternalProduct = computed<boolean>(() => product.value?.type === ProductTypesEnum.EXTERNAL);
 
 const type = computed(() => activeVariation.value || product.value);
-const selectProductInput = computed<any>(() => ({ productId: type.value?.databaseId, quantity: quantity.value })) as ComputedRef<AddToCartInput>;
+const selectProductInput = computed(() => ({
+  productId: Number(type.value?.databaseId),
+  quantity: quantity.value
+})) as ComputedRef<AddToCartInput>;
 
 const mergeLiveStockStatus = (payload: Product): void => {
-  product.value.stockStatus = payload.stockStatus ?? product.value?.stockStatus;
+  if (payload.stockStatus) {
+    product.value.stockStatus = payload.stockStatus;
+  }
 
   payload.variations?.nodes?.forEach((variation: Variation, index: number) => {
     if (product.value?.variations?.nodes[index]) {
@@ -41,10 +123,17 @@ const mergeLiveStockStatus = (payload: Product): void => {
 
 onMounted(async () => {
   try {
-    //const { product } = await GqlGetStockStatus({ slug });
-    const { data } = $useGql2('getStockStatus',{ slug });
-    const { product } = data;
-    if (product) mergeLiveStockStatus(product as Product);
+    const stockData = await import('../../data/stockStatus.json');
+    const stockProduct = stockData.data.product;
+    if (stockProduct) {
+      const mappedStockProduct = {
+        ...stockProduct,
+        type: stockProduct.type as ProductTypesEnum,
+        stockStatus: stockProduct.stockStatus as StockStatusEnum,
+        databaseId: Number(stockProduct.databaseId)
+      };
+      mergeLiveStockStatus(mappedStockProduct as Product);
+    }
   } catch (error: any) {
     const errorMessage = error?.gqlErrors?.[0].message;
     if (errorMessage) console.error(errorMessage);
@@ -56,14 +145,12 @@ const updateSelectedVariations = (variations: VariationAttribute[]): void => {
 
   attrValues.value = variations.map((el) => ({ attributeName: el.name, attributeValue: el.value }));
   const clonedVariations = JSON.parse(JSON.stringify(variations));
-  const getActiveVariation = product.value.variations?.nodes.filter((variation: any) => {
-    // If there is any variation of type ANY set the value to ''
+  const getActiveVariation = product.value.variations?.nodes.filter((variation: Variation) => {
     if (variation.attributes) {
-      // Set the value of the variation of type ANY to ''
       indexOfTypeAny.value.forEach((index) => (clonedVariations[index].value = ''));
-
       return arraysEqual(formatArray(variation.attributes.nodes), formatArray(clonedVariations));
     }
+    return false;
   });
 
   if (getActiveVariation[0]) activeVariation.value = getActiveVariation[0];
@@ -76,6 +163,7 @@ const stockStatus = computed(() => {
   if (isVariableProduct.value) return activeVariation.value?.stockStatus || StockStatusEnum.OUT_OF_STOCK;
   return type.value?.stockStatus || StockStatusEnum.OUT_OF_STOCK;
 });
+
 const disabledAddToCart = computed(() => {
   if (isSimpleProduct.value) return !type.value || stockStatus.value === StockStatusEnum.OUT_OF_STOCK || isUpdatingCart.value;
   return !type.value || stockStatus.value === StockStatusEnum.OUT_OF_STOCK || !activeVariation.value || isUpdatingCart.value;
@@ -99,11 +187,7 @@ const disabledAddToCart = computed(() => {
             <div class="flex-1">
               <h1 class="flex flex-wrap items-center gap-2 mb-2 text-2xl font-sesmibold">
                 {{ type.name }}
-                <!-- <LazyWPAdminLink :link="`/wp-admin/post.php?post=${product.databaseId}&action=edit`">Edit
-                </LazyWPAdminLink> -->
               </h1>
-              <!-- <StarRating :rating="product.averageRating || 0" :count="product.reviewCount || 0"
-                v-if="storeSettings.showReviews" /> -->
             </div>
             <ProductPrice class="text-xl" :sale-price="type.salePrice" :regular-price="type.regularPrice" />
           </div>
