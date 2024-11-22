@@ -1,0 +1,49 @@
+{
+  "site": {
+    "logo": "/images/logo.svg",
+    "hero": {
+      "image": "/images/hero.jpeg",
+      "title": "Welcome to our Shop",
+      "subtitle": "Discover our amazing products"
+    }
+  },
+  "categories": {
+    "electronics": {
+      "image": "/images/categories/electronics.jpg"
+    },
+    "clothing": {
+      "image": "/images/categories/clothing.jpg"
+    }
+  },
+  "brands": [
+    {
+      "name": "Brand 1",
+      "logo": "/images/logoipsum-211.svg"
+    },
+    {
+      "name": "Brand 2",
+      "logo": "/images/logoipsum-215.svg"
+    },
+    {
+      "name": "Brand 3",
+      "logo": "/images/logoipsum-221.svg"
+    }
+  ],
+  "features": [
+    {
+      "title": "Free Shipping",
+      "description": "On all orders over $50",
+      "icon": "/icons/box.svg"
+    },
+    {
+      "title": "Money Back",
+      "description": "30 day guarantee",
+      "icon": "/icons/moneyback.svg"
+    },
+    {
+      "title": "Secure Payments",
+      "description": "Protected by Stripe",
+      "icon": "/icons/secure.svg"
+    }
+  ]
+}

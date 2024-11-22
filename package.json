@@ -1,32 +1,23 @@
 {
-  "name": "woonuxt",
+  "name": "quickshop",
   "private": true,
+  "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev --host",
-    "dev:ssl": "NODE_TLS_REJECT_UNAUTHORIZED=0 nuxt dev --https --ssl-cert localhost.pem --ssl-key localhost-key.pem",
-    "generate": "nuxt generate",
+    "dev": "nuxt dev",
+    "generate": "node scripts/fetch-stripe-products.js && nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare",
-    "serve": "nuxi generate && npx serve .output/public -l 8080"
+    "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@stripe/stripe-js": "^4.5.0",
-    "@vueform/slider": "^2.1.10",
-    "@vueuse/core": "^11.1.0"
+    "@stripe/stripe-js": "^2.1.0",
+    "stripe": "^13.2.0",
+    "vue": "^3.3.4"
   },
   "devDependencies": {
-    "@nuxt/icon": "^1.5.2",
-    "@nuxt/image": "1.8.0",
-    "@nuxtjs/i18n": "^8.5.5",
-    "@nuxtjs/tailwindcss": "^6.12.1",
-    "@tailwindcss/typography": "^0.5.15",
-    "nuxt": "^3.13.2",
-    "nuxt-graphql-client": "^0.2.36",
-    "prettier": "^3.3.3",
-    "woonuxt-settings": "^1.0.61"
-  },
-  "overrides": {
-    "sharp": "0.32.6"
+    "@nuxt/devtools": "latest",
+    "@nuxt/image-edge": "^1.0.0-rc.1",
+    "@nuxtjs/tailwindcss": "^6.8.0",
+    "nuxt": "^3.6.5"
   }
 }
