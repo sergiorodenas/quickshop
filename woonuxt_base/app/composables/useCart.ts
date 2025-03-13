@@ -64,18 +64,64 @@ export function useCart() {
     isUpdatingCart.value = true;
 
     try {
-      // const { addToCart } = await GqlAddToCart({ input })
+      // Get the product information from the data
       const product = productsJson.data.value.products.nodes.find((product) => product.id === input.productId);
-      const oldCart = JSON.parse(localStorage.getItem('cart') as string);
-      console.log('oldCart', oldCart);
-      const { addToCart } = addToCartJson.data;
-      if (addToCart?.cart) cart.value = addToCart.cart;
-      localStorage.setItem('cart', JSON.stringify(cart.value));
-      // Auto open the cart when an item is added to the cart if the setting is enabled
-      const { storeSettings } = useAppConfig();
-      if (storeSettings.autoOpenCart && !isShowingCart.value) toggleCart(true);
+
+      if (!product) {
+        console.error("Product not found:", input.productId);
+        return;
+      }
+
+      // Get the current cart from localStorage or initialize from template
+      let currentCart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart') as string)
+        : structuredClone(addToCartJson.data.addToCart.cart);
+
+      // Check if product already exists in cart
+      const existingItemIndex = currentCart.contents.nodes.findIndex(
+        (node: any) => node.product?.node?.databaseId === input.productId
+      );
+
+      if (existingItemIndex !== -1) {
+        // Update existing item quantity
+        const existingItem = currentCart.contents.nodes[existingItemIndex];
+        existingItem.quantity += input.quantity || 1;
+
+        // Update cart totals
+        currentCart.contents.itemCount += input.quantity || 1;
+        // Don't increase product count for existing items
+      } else {
+        // Add new item to cart
+        const newItem = {
+          quantity: input.quantity || 1,
+          key: `item_${Date.now()}`,
+          product: {
+            node: product
+          },
+          variation: null
+        };
+
+        currentCart.contents.nodes.push(newItem);
+
+        // Update cart totals
+        currentCart.contents.itemCount += input.quantity || 1;
+        currentCart.contents.productCount += 1;
+      }
+
+      // Save updated cart to localStorage
+      localStorage.setItem('cart', JSON.stringify(currentCart));
+
+      // Update the reactive state
+      cart.value = currentCart;
+
+      // Auto open the cart when an item is added
+      if (storeSettings.autoOpenCart && !isShowingCart.value) {
+        toggleCart(true);
+      }
     } catch (error: any) {
-      logGQLError(error);
+      console.error('Error adding to cart:', error);
+    } finally {
+      isUpdatingCart.value = false;
     }
   }
 
