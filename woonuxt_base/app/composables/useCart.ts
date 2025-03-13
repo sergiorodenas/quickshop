@@ -13,7 +13,7 @@ export function useCart() {
   const cart = useState<Cart | null>('cart', () => null);
   const isShowingCart = useState<boolean>('isShowingCart', () => false);
   const isUpdatingCart = useState<boolean>('isUpdatingCart', () => false);
-  const { logGQLError, clearAllCookies } = useHelpers();
+  const { clearAllCookies } = useHelpers();
   /** Refesh the cart from the server
    * @returns {Promise<boolean>} - A promise that resolves
    * to true if the cart was successfully refreshed
@@ -30,7 +30,7 @@ export function useCart() {
 
       return true; // Cart was successfully refreshed
     } catch (error: any) {
-      logGQLError(error);
+      console.error(error);
       clearAllCookies();
       resetInitialState();
 
@@ -60,19 +60,15 @@ export function useCart() {
       const product = productsJson.data.value.products.nodes.find((product) => product.id === input.productId);
 
       if (!product) {
-        console.error("Product not found:", input.productId);
+        console.error('Product not found:', input.productId);
         return;
       }
 
       // Get the current cart from localStorage or initialize from template
-      let currentCart = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart') as string)
-        : structuredClone(addToCartJson.data.addToCart.cart);
+      let currentCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') as string) : structuredClone(addToCartJson.data.addToCart.cart);
 
       // Check if product already exists in cart
-      const existingItemIndex = currentCart.contents.nodes.findIndex(
-        (node: any) => node.product?.node?.databaseId === input.productId
-      );
+      const existingItemIndex = currentCart.contents.nodes.findIndex((node: any) => node.product?.node?.databaseId === input.productId);
 
       if (existingItemIndex !== -1) {
         // Update existing item quantity
@@ -81,6 +77,7 @@ export function useCart() {
 
         // Update cart totals
         currentCart.contents.itemCount += input.quantity || 1;
+        currentCart.isEmpty = false;
         // Don't increase product count for existing items
       } else {
         // Add new item to cart
@@ -88,9 +85,9 @@ export function useCart() {
           quantity: input.quantity || 1,
           key: `item_${Date.now()}`,
           product: {
-            node: product
+            node: product,
           },
-          variation: null
+          variation: null,
         };
 
         currentCart.contents.nodes.push(newItem);
@@ -98,6 +95,7 @@ export function useCart() {
         // Update cart totals
         currentCart.contents.itemCount += input.quantity || 1;
         currentCart.contents.productCount += 1;
+        currentCart.isEmpty = false;
       }
 
       // Save updated cart to localStorage
@@ -117,12 +115,90 @@ export function useCart() {
     }
   }
 
+  // Update the quantity of an item in the cart
+  async function updateItemQuantity(key: string, quantity: number): Promise<void> {
+    isUpdatingCart.value = true;
+
+    try {
+      // Get the current cart from localStorage
+      const currentCart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart') as string)
+        : null;
+
+      if (!currentCart) return;
+
+      // Find the item with the matching key
+      const itemIndex = currentCart.contents.nodes.findIndex((node: any) => node.key === key);
+
+      if (itemIndex !== -1) {
+        const item = currentCart.contents.nodes[itemIndex];
+        const oldQuantity = item.quantity;
+
+        // If quantity is 0, remove the item
+        if (quantity <= 0) {
+          currentCart.contents.nodes.splice(itemIndex, 1);
+          currentCart.contents.itemCount -= oldQuantity;
+          currentCart.contents.productCount -= 1;
+
+          // Check if cart is now empty
+          if (currentCart.contents.nodes.length === 0) {
+            currentCart.isEmpty = true;
+          }
+        } else {
+          // Otherwise update the quantity
+          item.quantity = quantity;
+          currentCart.contents.itemCount = currentCart.contents.itemCount - oldQuantity + quantity;
+        }
+
+        // Update cart in localStorage and state
+        localStorage.setItem('cart', JSON.stringify(currentCart));
+        cart.value = currentCart;
+      }
+    } catch (error: any) {
+      console.error('Error updating item quantity:', error);
+    } finally {
+      isUpdatingCart.value = false;
+    }
+  }
+
   // remove an item from the cart
   async function removeItem(key: string) {
     isUpdatingCart.value = true;
-    const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity: 0 });
-    // const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity: 0 }).data;
-    updateCart(updateItemQuantities?.cart);
+
+    try {
+      // Get the current cart from localStorage
+      const currentCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') as string) : null;
+
+      if (!currentCart) return;
+
+      // Filter out the item with the matching key
+      const itemIndex = currentCart.contents.nodes.findIndex((node: any) => node.key === key);
+
+      if (itemIndex !== -1) {
+        // Get the quantity of the item before removal
+        const removedQuantity = currentCart.contents.nodes[itemIndex].quantity;
+
+        // Remove the item
+        currentCart.contents.nodes.splice(itemIndex, 1);
+
+        // Update cart totals
+        currentCart.contents.itemCount -= removedQuantity;
+        currentCart.contents.productCount -= 1;
+
+        // Check if cart is now empty
+        if (currentCart.contents.nodes.length === 0) {
+          currentCart.isEmpty = true;
+        }
+
+        // Update cart in localStorage and state
+        localStorage.setItem('cart', JSON.stringify(currentCart));
+        cart.value = currentCart;
+      }
+    } catch (error: any) {
+      console.error('Error removing item from cart:', error);
+    } finally {
+      isUpdatingCart.value = false;
+    }
   }
 
   // empty the cart
@@ -134,7 +210,7 @@ export function useCart() {
       localStorage.removeItem('cart');
       updateCart(emptyCart?.cart);
     } catch (error: any) {
-      logGQLError(error);
+      console.error(error);
     }
   }
 
@@ -161,6 +237,7 @@ export function useCart() {
     refreshCart,
     toggleCart,
     addToCart,
+    updateItemQuantity,
     removeItem,
     emptyCart,
   };

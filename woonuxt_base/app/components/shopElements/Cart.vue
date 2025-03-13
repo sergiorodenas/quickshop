@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { cart, toggleCart, isUpdatingCart } = useCart();
+console.log(cart.value);
 const checkoutUrl = computed(() => {
   return 'https://stripe.com';
 });
