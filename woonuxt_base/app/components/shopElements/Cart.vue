@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { cart, toggleCart, isUpdatingCart } = useCart();
-console.log(cart.value);
 const checkoutUrl = computed(() => {
   return 'https://stripe.com';
 });
@@ -24,13 +23,13 @@ const checkoutUrl = computed(() => {
         <div class="px-8 mb-8">
           <!-- @click.prevent="toggleCart()" -->
           <a
-            class="block p-3 text-lg text-center text-white bg-gray-800 rounded-lg shadow-md justify-evenly hover:bg-gray-900"
+            class="block w-full p-3 text-lg text-center text-white bg-gray-800 rounded-lg shadow-md justify-evenly hover:bg-gray-900"
             :href="checkoutUrl"
             target="_blank"
           >
             <span class="mx-2">{{ $t('messages.shop.checkout') }}</span>
             <span v-html="cart.total" />
-        </a>
+          </a>
         </div>
       </template>
       <!-- Empty Cart Message -->

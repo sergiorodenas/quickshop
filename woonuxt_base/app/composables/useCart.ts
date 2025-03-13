@@ -10,263 +10,269 @@ import productsJson from '../data/getProducts.json';
 export function useCart() {
   const { storeSettings } = useAppConfig();
 
+  // State
   const cart = useState<Cart | null>('cart', () => null);
   const isShowingCart = useState<boolean>('isShowingCart', () => false);
   const isUpdatingCart = useState<boolean>('isUpdatingCart', () => false);
-  const { clearAllCookies } = useHelpers();
-  /** Refesh the cart from the server
-   * @returns {Promise<boolean>} - A promise that resolves
-   * to true if the cart was successfully refreshed
-   */
+
+  // Initialize cart from localStorage if available
   if (localStorage.getItem('cart') !== null) {
     cart.value = JSON.parse(localStorage.getItem('cart') as string) as Cart;
   }
 
-  async function refreshCart(): Promise<boolean> {
-    try {
-      const { cart, customer, viewer } = getCartJson.data;
+  // Watch cart changes to update loading state
+  watch(cart, () => {
+    isUpdatingCart.value = false;
+  });
 
-      if (cart) updateCart(cart);
+  // ==================== Helper Functions ====================
 
-      return true; // Cart was successfully refreshed
-    } catch (error: any) {
-      console.error(error);
-      clearAllCookies();
-      resetInitialState();
-
-      return false;
-    }
+  /**
+   * Get cart from localStorage or create a new one
+   */
+  function getCartFromStorage(): any {
+    return localStorage.getItem('cart')
+      ? JSON.parse(localStorage.getItem('cart') as string)
+      : structuredClone(addToCartJson.data.addToCart.cart);
   }
 
-  function resetInitialState() {
+  /**
+   * Save cart to localStorage and update reactive state
+   */
+  function saveCart(cartData: any): void {
+    localStorage.setItem('cart', JSON.stringify(cartData));
+    cart.value = cartData;
+  }
+
+  /**
+   * Remove cart from localStorage and reset state
+   */
+  function clearCart(): void {
+    localStorage.removeItem('cart');
     cart.value = null;
   }
 
-  function updateCart(payload?: Cart | null): void {
-    cart.value = payload || null;
+  /**
+   * Handle operation errors consistently
+   */
+  function handleError(operation: string, error: any): void {
+    console.error(`Error during ${operation}:`, error);
   }
 
-  // toggle the cart visibility
-  function toggleCart(state: boolean | undefined = undefined): void {
-    isShowingCart.value = state ?? !isShowingCart.value;
-  }
-
-  // Helper function to recalculate cart totals
-  function recalculateCartTotals(currentCart: any): void {
-    if (!currentCart || !currentCart.contents || !currentCart.contents.nodes) return;
+  /**
+   * Recalculate cart totals based on items
+   */
+  function recalculateCartTotals(cartData: any): void {
+    if (!cartData?.contents?.nodes) return;
 
     // Calculate subtotal from items
     let subtotalValue = 0;
 
-    for (const item of currentCart.contents.nodes) {
+    for (const item of cartData.contents.nodes) {
       const price = parseFloat(item.product?.node?.rawRegularPrice || "0");
       subtotalValue += price * item.quantity;
     }
 
-    // Update subtotal
-    currentCart.subtotal = `€${subtotalValue.toFixed(2)}`;
-
-    // Update total values
-    currentCart.rawTotal = subtotalValue.toFixed(2);
-    currentCart.total = `€${subtotalValue.toFixed(2)}`;
+    // Update cart values
+    cartData.subtotal = `€${subtotalValue.toFixed(2)}`;
+    cartData.rawTotal = subtotalValue.toFixed(2);
+    cartData.total = `€${subtotalValue.toFixed(2)}`;
   }
 
-  // Update the addToCart function to recalculate totals
+  /**
+   * Check if cart is empty and update isEmpty flag
+   */
+  function updateEmptyState(cartData: any): void {
+    if (!cartData?.contents?.nodes) return;
+    cartData.isEmpty = cartData.contents.nodes.length === 0;
+  }
+
+  // ==================== Main Cart Functions ====================
+
+  /**
+   * Update the cart with new data
+   */
+  function updateCart(payload?: Cart | null): void {
+    cart.value = payload || null;
+
+    if (cart.value) {
+      saveCart(cart.value);
+    } else {
+      clearCart();
+    }
+  }
+
+  /**
+   * Reset cart to initial state
+   */
+  function resetInitialState(): void {
+    clearCart();
+  }
+
+  /**
+   * Refresh cart from server data
+   */
+  async function refreshCart(): Promise<boolean> {
+    try {
+      const { cart: serverCart } = getCartJson.data;
+
+      if (serverCart) {
+        updateCart(serverCart);
+      }
+
+      return true;
+    } catch (error: any) {
+      handleError('refreshCart', error);
+      resetInitialState();
+      return false;
+    }
+  }
+
+  /**
+   * Toggle cart visibility
+   */
+  function toggleCart(state: boolean | undefined = undefined): void {
+    isShowingCart.value = state ?? !isShowingCart.value;
+  }
+
+  /**
+   * Add an item to the cart
+   */
   async function addToCart(input: any): Promise<void> {
     isUpdatingCart.value = true;
 
     try {
-      // Get the product information from the data
-      const product = productsJson.data.value.products.nodes.find((product) => product.id === input.productId);
+      // Get product data
+      const product = productsJson.data.value.products.nodes.find(
+        (p) => p.id === input.productId
+      );
 
       if (!product) {
         console.error('Product not found:', input.productId);
         return;
       }
 
-      // Get the current cart from localStorage or initialize from template
-      let currentCart = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart') as string)
-        : structuredClone(addToCartJson.data.addToCart.cart);
+      // Get or initialize cart
+      const currentCart = getCartFromStorage();
+      const quantity = input.quantity || 1;
 
-      // Check if product already exists in cart
+      // Find existing item
       const existingItemIndex = currentCart.contents.nodes.findIndex(
         (node: any) => node.product?.node?.databaseId === input.productId
       );
 
       if (existingItemIndex !== -1) {
-        // Update existing item quantity
+        // Update existing item
         const existingItem = currentCart.contents.nodes[existingItemIndex];
-        existingItem.quantity += input.quantity || 1;
-
-        // Update cart totals
-        currentCart.contents.itemCount += input.quantity || 1;
-        currentCart.isEmpty = false;
+        existingItem.quantity += quantity;
+        currentCart.contents.itemCount += quantity;
       } else {
-        // Add new item to cart
+        // Add new item
         const newItem = {
-          quantity: input.quantity || 1,
+          quantity,
           key: `item_${Date.now()}`,
-          product: {
-            node: product,
-          },
+          product: { node: product },
           variation: null,
         };
 
         currentCart.contents.nodes.push(newItem);
-
-        // Update cart totals
-        currentCart.contents.itemCount += input.quantity || 1;
+        currentCart.contents.itemCount += quantity;
         currentCart.contents.productCount += 1;
-        currentCart.isEmpty = false;
       }
 
-      // Recalculate cart totals
+      // Update cart state
+      updateEmptyState(currentCart);
       recalculateCartTotals(currentCart);
+      saveCart(currentCart);
 
-      // Save updated cart to localStorage
-      localStorage.setItem('cart', JSON.stringify(currentCart));
-
-      // Update the reactive state
-      cart.value = currentCart;
-
-      // Auto open the cart when an item is added
+      // Auto open cart if enabled
       if (storeSettings.autoOpenCart && !isShowingCart.value) {
         toggleCart(true);
       }
     } catch (error: any) {
-      console.error('Error adding to cart:', error);
+      handleError('addToCart', error);
     } finally {
       isUpdatingCart.value = false;
     }
   }
 
-  // Update the updateItemQuantity function to recalculate totals
+  /**
+   * Update item quantity in cart
+   */
   async function updateItemQuantity(key: string, quantity: number): Promise<void> {
     isUpdatingCart.value = true;
 
     try {
-      // Get the current cart from localStorage
-      const currentCart = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart') as string)
-        : null;
-
+      const currentCart = getCartFromStorage();
       if (!currentCart) return;
 
-      // Find the item with the matching key
-      const itemIndex = currentCart.contents.nodes.findIndex((node: any) => node.key === key);
+      const itemIndex = currentCart.contents.nodes.findIndex(
+        (node: any) => node.key === key
+      );
 
-      if (itemIndex !== -1) {
-        const item = currentCart.contents.nodes[itemIndex];
-        const oldQuantity = item.quantity;
+      if (itemIndex === -1) return;
 
-        // If quantity is 0, remove the item
-        if (quantity <= 0) {
-          currentCart.contents.nodes.splice(itemIndex, 1);
-          currentCart.contents.itemCount -= oldQuantity;
-          currentCart.contents.productCount -= 1;
+      const item = currentCart.contents.nodes[itemIndex];
+      const oldQuantity = item.quantity;
 
-          // Check if cart is now empty
-          if (currentCart.contents.nodes.length === 0) {
-            currentCart.isEmpty = true;
-          }
-        } else {
-          // Otherwise update the quantity
-          item.quantity = quantity;
-          currentCart.contents.itemCount = currentCart.contents.itemCount - oldQuantity + quantity;
-        }
-
-        // Recalculate cart totals
-        recalculateCartTotals(currentCart);
-
-        // Update cart in localStorage and state
-        localStorage.setItem('cart', JSON.stringify(currentCart));
-        cart.value = currentCart;
+      if (quantity <= 0) {
+        // Remove item
+        currentCart.contents.nodes.splice(itemIndex, 1);
+        currentCart.contents.itemCount -= oldQuantity;
+        currentCart.contents.productCount -= 1;
+      } else {
+        // Update quantity
+        item.quantity = quantity;
+        currentCart.contents.itemCount = currentCart.contents.itemCount - oldQuantity + quantity;
       }
+
+      // Update cart state
+      updateEmptyState(currentCart);
+      recalculateCartTotals(currentCart);
+      saveCart(currentCart);
     } catch (error: any) {
-      console.error('Error updating item quantity:', error);
+      handleError('updateItemQuantity', error);
     } finally {
       isUpdatingCart.value = false;
     }
   }
 
-  // Update the removeItem function to recalculate totals
-  async function removeItem(key: string) {
+  /**
+   * Remove an item from cart
+   */
+  async function removeItem(key: string): Promise<void> {
+    // Reuse updateItemQuantity with quantity 0 to remove item
+    return updateItemQuantity(key, 0);
+  }
+
+  /**
+   * Empty the cart
+   */
+  async function emptyCart(): Promise<void> {
     isUpdatingCart.value = true;
 
     try {
-      // Get the current cart from localStorage
-      const currentCart = localStorage.getItem('cart')
-        ? JSON.parse(localStorage.getItem('cart') as string)
-        : null;
+      const { emptyCart: emptyCartData } = emptyCartJson.data;
+      clearCart();
 
-      if (!currentCart) return;
-
-      // Filter out the item with the matching key
-      const itemIndex = currentCart.contents.nodes.findIndex((node: any) => node.key === key);
-
-      if (itemIndex !== -1) {
-        // Get the quantity of the item before removal
-        const removedQuantity = currentCart.contents.nodes[itemIndex].quantity;
-
-        // Remove the item
-        currentCart.contents.nodes.splice(itemIndex, 1);
-
-        // Update cart totals
-        currentCart.contents.itemCount -= removedQuantity;
-        currentCart.contents.productCount -= 1;
-
-        // Check if cart is now empty
-        if (currentCart.contents.nodes.length === 0) {
-          currentCart.isEmpty = true;
-        }
-
-        // Recalculate cart totals
-        recalculateCartTotals(currentCart);
-
-        // Update cart in localStorage and state
-        localStorage.setItem('cart', JSON.stringify(currentCart));
-        cart.value = currentCart;
+      if (emptyCartData?.cart) {
+        updateCart(emptyCartData.cart);
       }
     } catch (error: any) {
-      console.error('Error removing item from cart:', error);
+      handleError('emptyCart', error);
     } finally {
       isUpdatingCart.value = false;
     }
   }
 
-  // empty the cart
-  async function emptyCart(): Promise<void> {
-    try {
-      isUpdatingCart.value = true;
-      // const { emptyCart } = await GqlEmptyCart();
-      const { emptyCart } = emptyCartJson.data;
-      localStorage.removeItem('cart');
-      updateCart(emptyCart?.cart);
-    } catch (error: any) {
-      console.error(error);
-    }
-  }
-
-  // Stop the loading spinner when the cart is updated
-  watch(cart, (val) => {
-    isUpdatingCart.value = false;
-  });
-
-  // Check if all products in the cart are virtual
-  const allProductsAreVirtual = computed(() => {
-    const nodes = cart.value?.contents?.nodes || [];
-    return nodes.length === 0 ? false : nodes.every((node) => (node.product?.node as SimpleProduct)?.virtual === true);
-  });
-
-  // Check if the billing address is enabled
-  const isBillingAddressEnabled = computed(() => (storeSettings.hideBillingAddressForVirtualProducts ? !allProductsAreVirtual.value : true));
-
+  // Return public API
   return {
+    // State
     cart,
     isShowingCart,
     isUpdatingCart,
-    isBillingAddressEnabled,
+
+    // Methods
     updateCart,
     refreshCart,
     toggleCart,
