@@ -30,16 +30,7 @@ export default defineNuxtConfig({
 
   components: [{ path: resolve('./app/components'), pathPrefix: false }],
 
-  modules: ['woonuxt-settings', 'nuxt-graphql-client', '@nuxtjs/tailwindcss', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n'],
-
-  'graphql-client': {
-    clients: {
-      default: {
-        host: process.env.GQL_HOST || 'http://localhost:4000/graphql',
-        corsOptions: { mode: 'cors', credentials: 'include' },
-      },
-    },
-  },
+  modules: ['woonuxt-settings', '@nuxtjs/tailwindcss', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n'],
 
   alias: {
     '#constants': resolve('./app/constants'),

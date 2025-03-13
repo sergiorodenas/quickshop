@@ -27,11 +27,8 @@ export function useCart() {
   async function refreshCart(): Promise<boolean> {
     try {
       const { cart, customer, viewer, paymentGateways } = getCartJson.data;
-      const { updateCustomer, updateViewer } = useAuth();
 
       if (cart) updateCart(cart);
-      if (customer) updateCustomer(customer);
-      if (viewer) updateViewer(viewer);
       if (paymentGateways) updatePaymentGateways(paymentGateways);
 
       return true; // Cart was successfully refreshed

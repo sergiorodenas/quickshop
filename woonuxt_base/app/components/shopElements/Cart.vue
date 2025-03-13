@@ -1,5 +1,8 @@
 <script setup lang="ts">
 const { cart, toggleCart, isUpdatingCart } = useCart();
+const checkoutUrl = computed(() => {
+  return 'https://stripe.com';
+});
 </script>
 
 <template>
@@ -18,13 +21,15 @@ const { cart, toggleCart, isUpdatingCart } = useCart();
           <CartCard v-for="item in cart.contents?.nodes" :key="item.key" :item />
         </ul>
         <div class="px-8 mb-8">
-          <NuxtLink
+          <!-- @click.prevent="toggleCart()" -->
+          <a
             class="block p-3 text-lg text-center text-white bg-gray-800 rounded-lg shadow-md justify-evenly hover:bg-gray-900"
-            to="/checkout"
-            @click.prevent="toggleCart()">
+            :href="checkoutUrl"
+            target="_blank"
+          >
             <span class="mx-2">{{ $t('messages.shop.checkout') }}</span>
             <span v-html="cart.total" />
-          </NuxtLink>
+        </a>
         </div>
       </template>
       <!-- Empty Cart Message -->
