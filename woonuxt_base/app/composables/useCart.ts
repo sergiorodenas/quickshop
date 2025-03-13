@@ -13,8 +13,6 @@ export function useCart() {
   const cart = useState<Cart | null>('cart', () => null);
   const isShowingCart = useState<boolean>('isShowingCart', () => false);
   const isUpdatingCart = useState<boolean>('isUpdatingCart', () => false);
-  const isUpdatingCoupon = useState<boolean>('isUpdatingCoupon', () => false);
-  const paymentGateways = useState<PaymentGateways | null>('paymentGateways', () => null);
   const { logGQLError, clearAllCookies } = useHelpers();
   /** Refesh the cart from the server
    * @returns {Promise<boolean>} - A promise that resolves
@@ -26,10 +24,9 @@ export function useCart() {
 
   async function refreshCart(): Promise<boolean> {
     try {
-      const { cart, customer, viewer, paymentGateways } = getCartJson.data;
+      const { cart, customer, viewer } = getCartJson.data;
 
       if (cart) updateCart(cart);
-      if (paymentGateways) updatePaymentGateways(paymentGateways);
 
       return true; // Cart was successfully refreshed
     } catch (error: any) {
@@ -43,15 +40,10 @@ export function useCart() {
 
   function resetInitialState() {
     cart.value = null;
-    paymentGateways.value = null;
   }
 
   function updateCart(payload?: Cart | null): void {
     cart.value = payload || null;
-  }
-
-  function updatePaymentGateways(payload: PaymentGateways): void {
-    paymentGateways.value = payload;
   }
 
   // toggle the cart visibility
@@ -133,18 +125,6 @@ export function useCart() {
     updateCart(updateItemQuantities?.cart);
   }
 
-  // update the quantity of an item in the cart
-  async function updateItemQuantity(key: string, quantity: number): Promise<void> {
-    isUpdatingCart.value = true;
-    try {
-      const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity });
-      // const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity }).data;
-      updateCart(updateItemQuantities?.cart);
-    } catch (error: any) {
-      logGQLError(error);
-    }
-  }
-
   // empty the cart
   async function emptyCart(): Promise<void> {
     try {
@@ -155,39 +135,6 @@ export function useCart() {
       updateCart(emptyCart?.cart);
     } catch (error: any) {
       logGQLError(error);
-    }
-  }
-
-  // Update shipping method
-  async function updateShippingMethod(shippingMethods: string) {
-    isUpdatingCart.value = true;
-    const { updateShippingMethod } = await GqlChangeShippingMethod({ shippingMethods });
-    updateCart(updateShippingMethod?.cart);
-  }
-
-  // Apply coupon
-  async function applyCoupon(code: string): Promise<{ message: string | null }> {
-    try {
-      isUpdatingCoupon.value = true;
-      const { applyCoupon } = await GqlApplyCoupon({ code });
-      updateCart(applyCoupon?.cart);
-      isUpdatingCoupon.value = false;
-    } catch (error: any) {
-      isUpdatingCoupon.value = false;
-      logGQLError(error);
-    }
-    return { message: null };
-  }
-
-  // Remove coupon
-  async function removeCoupon(code: string): Promise<void> {
-    try {
-      isUpdatingCart.value = true;
-      const { removeCoupons } = await GqlRemoveCoupons({ codes: [code] });
-      updateCart(removeCoupons?.cart);
-    } catch (error) {
-      logGQLError(error);
-      isUpdatingCart.value = false;
     }
   }
 
@@ -209,18 +156,12 @@ export function useCart() {
     cart,
     isShowingCart,
     isUpdatingCart,
-    isUpdatingCoupon,
-    paymentGateways,
     isBillingAddressEnabled,
     updateCart,
     refreshCart,
     toggleCart,
     addToCart,
     removeItem,
-    updateItemQuantity,
     emptyCart,
-    updateShippingMethod,
-    applyCoupon,
-    removeCoupon,
   };
 }
