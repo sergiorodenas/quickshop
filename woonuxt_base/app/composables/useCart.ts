@@ -51,7 +51,27 @@ export function useCart() {
     isShowingCart.value = state ?? !isShowingCart.value;
   }
 
-  // add an item to the cart
+  // Helper function to recalculate cart totals
+  function recalculateCartTotals(currentCart: any): void {
+    if (!currentCart || !currentCart.contents || !currentCart.contents.nodes) return;
+
+    // Calculate subtotal from items
+    let subtotalValue = 0;
+
+    for (const item of currentCart.contents.nodes) {
+      const price = parseFloat(item.product?.node?.rawRegularPrice || "0");
+      subtotalValue += price * item.quantity;
+    }
+
+    // Update subtotal
+    currentCart.subtotal = `€${subtotalValue.toFixed(2)}`;
+
+    // Update total values
+    currentCart.rawTotal = subtotalValue.toFixed(2);
+    currentCart.total = `€${subtotalValue.toFixed(2)}`;
+  }
+
+  // Update the addToCart function to recalculate totals
   async function addToCart(input: any): Promise<void> {
     isUpdatingCart.value = true;
 
@@ -65,10 +85,14 @@ export function useCart() {
       }
 
       // Get the current cart from localStorage or initialize from template
-      let currentCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') as string) : structuredClone(addToCartJson.data.addToCart.cart);
+      let currentCart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart') as string)
+        : structuredClone(addToCartJson.data.addToCart.cart);
 
       // Check if product already exists in cart
-      const existingItemIndex = currentCart.contents.nodes.findIndex((node: any) => node.product?.node?.databaseId === input.productId);
+      const existingItemIndex = currentCart.contents.nodes.findIndex(
+        (node: any) => node.product?.node?.databaseId === input.productId
+      );
 
       if (existingItemIndex !== -1) {
         // Update existing item quantity
@@ -78,7 +102,6 @@ export function useCart() {
         // Update cart totals
         currentCart.contents.itemCount += input.quantity || 1;
         currentCart.isEmpty = false;
-        // Don't increase product count for existing items
       } else {
         // Add new item to cart
         const newItem = {
@@ -98,6 +121,9 @@ export function useCart() {
         currentCart.isEmpty = false;
       }
 
+      // Recalculate cart totals
+      recalculateCartTotals(currentCart);
+
       // Save updated cart to localStorage
       localStorage.setItem('cart', JSON.stringify(currentCart));
 
@@ -115,7 +141,7 @@ export function useCart() {
     }
   }
 
-  // Update the quantity of an item in the cart
+  // Update the updateItemQuantity function to recalculate totals
   async function updateItemQuantity(key: string, quantity: number): Promise<void> {
     isUpdatingCart.value = true;
 
@@ -150,6 +176,9 @@ export function useCart() {
           currentCart.contents.itemCount = currentCart.contents.itemCount - oldQuantity + quantity;
         }
 
+        // Recalculate cart totals
+        recalculateCartTotals(currentCart);
+
         // Update cart in localStorage and state
         localStorage.setItem('cart', JSON.stringify(currentCart));
         cart.value = currentCart;
@@ -161,13 +190,15 @@ export function useCart() {
     }
   }
 
-  // remove an item from the cart
+  // Update the removeItem function to recalculate totals
   async function removeItem(key: string) {
     isUpdatingCart.value = true;
 
     try {
       // Get the current cart from localStorage
-      const currentCart = localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart') as string) : null;
+      const currentCart = localStorage.getItem('cart')
+        ? JSON.parse(localStorage.getItem('cart') as string)
+        : null;
 
       if (!currentCart) return;
 
@@ -189,6 +220,9 @@ export function useCart() {
         if (currentCart.contents.nodes.length === 0) {
           currentCart.isEmpty = true;
         }
+
+        // Recalculate cart totals
+        recalculateCartTotals(currentCart);
 
         // Update cart in localStorage and state
         localStorage.setItem('cart', JSON.stringify(currentCart));
