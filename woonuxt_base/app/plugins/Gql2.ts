@@ -10,7 +10,6 @@ export default defineNuxtPlugin(() => {
   return {
     provide: {
       useGql2: (methodName: string, params: any) => {
-        console.log('useGql2:', methodName, params);
         switch (methodName) {
           case 'getProduct':
             return {
