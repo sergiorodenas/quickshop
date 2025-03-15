@@ -14,9 +14,9 @@ export function useCart() {
   const cart = useState<Cart | null>('cart', () => null);
   const isShowingCart = useState<boolean>('isShowingCart', () => false);
   const isUpdatingCart = useState<boolean>('isUpdatingCart', () => false);
-
+  
   // Initialize cart from localStorage if available
-  if (localStorage.getItem('cart') !== null) {
+  if (process.client && localStorage.getItem('cart') !== null) {
     cart.value = JSON.parse(localStorage.getItem('cart') as string) as Cart;
   }
 
@@ -31,7 +31,7 @@ export function useCart() {
    * Get cart from localStorage or create a new one
    */
   function getCartFromStorage(): any {
-    return localStorage.getItem('cart')
+    return process.client && localStorage.getItem('cart')
       ? JSON.parse(localStorage.getItem('cart') as string)
       : structuredClone(addToCartJson.data.addToCart.cart);
   }
@@ -40,7 +40,7 @@ export function useCart() {
    * Save cart to localStorage and update reactive state
    */
   function saveCart(cartData: any): void {
-    localStorage.setItem('cart', JSON.stringify(cartData));
+    process.client && localStorage.setItem('cart', JSON.stringify(cartData));
     cart.value = cartData;
   }
 
@@ -48,7 +48,7 @@ export function useCart() {
    * Remove cart from localStorage and reset state
    */
   function clearCart(): void {
-    localStorage.removeItem('cart');
+    process.client && localStorage.removeItem('cart');
     cart.value = null;
   }
 

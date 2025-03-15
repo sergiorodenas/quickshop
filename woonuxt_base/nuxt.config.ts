@@ -27,15 +27,15 @@ export default defineNuxtConfig({
     },
   },
 
-  plugins: [resolve('./app/plugins/init.ts')],
+  plugins: [resolve('./app/plugins/Gql2.ts')],
 
   components: [{ path: resolve('./app/components'), pathPrefix: false }],
 
-  modules: ['woonuxt-settings', '@nuxtjs/tailwindcss', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n'],
+  modules: ['@nuxtjs/tailwindcss', '@nuxt/icon', '@nuxt/image', '@nuxtjs/i18n'],
 
   alias: {
     '#constants': resolve('./app/constants'),
-    '#woo': '../.nuxt/gql/default',
+    //'#woo': '../.nuxt/gql/default',
   },
 
   hooks: {
@@ -47,8 +47,8 @@ export default defineNuxtConfig({
       addPage('product-page-pager', '/products/page/:pageNumber', 'products.vue');
       addPage('product-category-page', '/product-category/:categorySlug', 'product-category/[slug].vue');
       addPage('product-category-page-pager', '/product-category/:categorySlug/page/:pageNumber', 'product-category/[slug].vue');
-      addPage('order-received', '/checkout/order-received/:orderId', 'order-summary.vue');
-      addPage('order-summary', '/order-summary/:orderId', 'order-summary.vue');
+      // addPage('order-received', '/checkout/order-received/:orderId', 'order-summary.vue');
+      // addPage('order-summary', '/order-summary/:orderId', 'order-summary.vue');
     },
   },
 
@@ -56,8 +56,9 @@ export default defineNuxtConfig({
     routeRules: {
       '/': { prerender: true },
       '/products/**': { swr: 3600 },
-      '/checkout/order-received/**': { ssr: false },
-      '/order-summary/**': { ssr: false },
+      '/product-category/**': { swr: 3600 },
+      // '/checkout/order-received/**': { ssr: false },
+      // '/order-summary/**': { ssr: false },
     },
   },
 
