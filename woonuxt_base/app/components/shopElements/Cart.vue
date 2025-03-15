@@ -1,8 +1,17 @@
 <script setup lang="ts">
-const { cart, toggleCart, isUpdatingCart } = useCart();
-const checkoutUrl = computed(() => {
-  return 'https://stripe.com';
-});
+const { cart, toggleCart, isUpdatingCart } = await useCart();
+const redirectToStripe = async () => {
+  const stripe = window.Stripe("pk_live_uY0a26JeTs4kSuavmpUg3aWz");
+  const {error} = await stripe.redirectToCheckout({
+    lineItems: cart.value.contents.nodes.map(item => ({
+      price: item.product.node.price_id,
+      quantity: item.quantity
+    })),
+    mode: 'payment',
+    successUrl: 'https://ide-preview-js.sergiorodenas.com/success',
+    cancelUrl: 'https://ide-preview-js.sergiorodenas.com/cancel',
+  })
+};
 </script>
 
 <template>
@@ -24,7 +33,7 @@ const checkoutUrl = computed(() => {
           <!-- @click.prevent="toggleCart()" -->
           <a
             class="block w-full p-3 text-lg text-center text-white bg-gray-800 rounded-lg shadow-md justify-evenly hover:bg-gray-900"
-            :href="checkoutUrl"
+            @click="redirectToStripe"
             target="_blank"
           >
             <span class="mx-2">{{ $t('messages.shop.checkout') }}</span>

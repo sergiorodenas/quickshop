@@ -11,6 +11,7 @@ export default defineNuxtConfig({
     head: {
       htmlAttrs: { lang: 'en' },
       link: [{ rel: 'icon', href: '/logo.svg', type: 'image/svg+xml' }],
+      script: [{ hid: "stripe", src: "https://js.stripe.com/v3/", defer: true }]
     },
     pageTransition: { name: 'page', mode: 'default' },
   },
