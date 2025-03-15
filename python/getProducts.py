@@ -28,6 +28,7 @@ def get_formatted_products():
             "description": product.get("description"),
             "rawDescription": product.get("description"),
             "shortDescription": product.get("description"),
+            "price_id": price_data.id,
             #"attributes": {"nodes": []},
             "productCategories": {"nodes": [
                 {

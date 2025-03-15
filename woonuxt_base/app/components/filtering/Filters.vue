@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TaxonomyEnum } from '#woo';
+//import { TaxonomyEnum } from '#woo';
 
 const { isFiltersActive } = useFiltering();
 const { removeBodyClass } = useHelpers();

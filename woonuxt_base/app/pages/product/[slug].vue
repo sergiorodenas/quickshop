@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { StockStatusEnum, ProductTypesEnum, type AddToCartInput } from '#woo';
 
 
 const route = useRoute();
@@ -22,12 +21,12 @@ const activeVariation = ref<Variation | null>(null);
 const variation = ref<VariationAttribute[]>([]);
 const indexOfTypeAny = computed<number[]>(() => checkForVariationTypeOfAny(product.value));
 const attrValues = ref();
-const isSimpleProduct = computed<boolean>(() => product.value?.type === ProductTypesEnum.SIMPLE);
-const isVariableProduct = computed<boolean>(() => product.value?.type === ProductTypesEnum.VARIABLE);
-const isExternalProduct = computed<boolean>(() => product.value?.type === ProductTypesEnum.EXTERNAL);
+const isSimpleProduct = computed<boolean>(() => product.value?.type === "SIMPLE");
+const isVariableProduct = computed<boolean>(() => product.value?.type === "VARIABLE");
+const isExternalProduct = computed<boolean>(() => product.value?.type === "EXTERNAL");
 
 const type = computed(() => activeVariation.value || product.value);
-const selectProductInput = computed<any>(() => ({ productId: type.value?.databaseId, quantity: quantity.value })) as ComputedRef<AddToCartInput>;
+const selectProductInput = computed<any>(() => ({ productId: type.value?.databaseId, quantity: quantity.value })) as ComputedRef<any>;
 
 const mergeLiveStockStatus = (payload: Product): void => {
   product.value.stockStatus = payload.stockStatus ?? product.value?.stockStatus;
@@ -73,12 +72,12 @@ const updateSelectedVariations = (variations: VariationAttribute[]): void => {
 };
 
 const stockStatus = computed(() => {
-  if (isVariableProduct.value) return activeVariation.value?.stockStatus || StockStatusEnum.OUT_OF_STOCK;
-  return type.value?.stockStatus || StockStatusEnum.OUT_OF_STOCK;
+  if (isVariableProduct.value) return activeVariation.value?.stockStatus || "OUT_OF_STOCK";
+  return type.value?.stockStatus || "OUT_OF_STOCK";
 });
 const disabledAddToCart = computed(() => {
-  if (isSimpleProduct.value) return !type.value || stockStatus.value === StockStatusEnum.OUT_OF_STOCK || isUpdatingCart.value;
-  return !type.value || stockStatus.value === StockStatusEnum.OUT_OF_STOCK || !activeVariation.value || isUpdatingCart.value;
+  if (isSimpleProduct.value) return !type.value || stockStatus.value === "OUT_OF_STOCK" || isUpdatingCart.value;
+  return !type.value || stockStatus.value === "OUT_OF_STOCK" || !activeVariation.value || isUpdatingCart.value;
 });
 </script>
 

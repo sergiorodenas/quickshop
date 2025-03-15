@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ProductsOrderByEnum } from '#woo';
+//import { ProductsOrderByEnum } from '#woo';
 const { siteName, description, shortDescription, siteImage } = useAppConfig();
 const { $useGql2 } = useNuxtApp();
 const { data } = $useGql2("getProductCategories");
@@ -10,7 +10,7 @@ const productCategories = data.value.productCategories.nodes.filter((elem, index
 
 //const { data: productData } = await useAsyncGql('getProducts', { first: 5, orderby: ProductsOrderByEnum.POPULARITY });
 
-const productData = { value: data.value }
+const { data: productData } = $useGql2("getProducts");
 
 const popularProducts = productData.value.products?.nodes.filter((elem, index) => index < 5) || [];
 
