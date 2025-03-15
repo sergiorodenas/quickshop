@@ -12,7 +12,7 @@ export function useWishlist() {
    */
   function addToWishlist(item: Product): void {
     theList.value.push(item);
-    localStorage.setItem('wishlist', JSON.stringify(theList.value));
+    process.client && localStorage.setItem('wishlist', JSON.stringify(theList.value));
   }
 
   /**
@@ -22,7 +22,7 @@ export function useWishlist() {
    */
   function removeFromWishlist(databaseId: number): void {
     theList.value = theList.value.filter((item) => item.databaseId !== databaseId);
-    localStorage.setItem('wishlist', JSON.stringify(theList.value));
+    process.client && localStorage.setItem('wishlist', JSON.stringify(theList.value));
   }
 
   /**
@@ -42,7 +42,7 @@ export function useWishlist() {
    * Get the list from local storage
    */
   function getFromLocalStorage(): void {
-    const wishlist = localStorage.getItem('wishlist');
+    const wishlist = process.client ? localStorage.getItem('wishlist') : '{}';
     if (wishlist) theList.value = JSON.parse(wishlist);
   }
 
@@ -51,7 +51,7 @@ export function useWishlist() {
    */
   function clearWishlist(): void {
     theList.value = [];
-    localStorage.removeItem('wishlist');
+    process.client && localStorage.removeItem('wishlist');
   }
 
   onMounted(() => {

@@ -10,174 +10,275 @@ import productsJson from '../data/getProducts.json';
 export function useCart() {
   const { storeSettings } = useAppConfig();
 
+  // State
   const cart = useState<Cart | null>('cart', () => null);
   const isShowingCart = useState<boolean>('isShowingCart', () => false);
   const isUpdatingCart = useState<boolean>('isUpdatingCart', () => false);
-  const isUpdatingCoupon = useState<boolean>('isUpdatingCoupon', () => false);
-  const paymentGateways = useState<PaymentGateways | null>('paymentGateways', () => null);
-  const { logGQLError, clearAllCookies } = useHelpers();
-  /** Refesh the cart from the server
-   * @returns {Promise<boolean>} - A promise that resolves
-   * to true if the cart was successfully refreshed
-   */
-  if (localStorage.getItem('cart') !== null) {
+  
+  // Initialize cart from localStorage if available
+  if (process.client && localStorage.getItem('cart') !== null) {
     cart.value = JSON.parse(localStorage.getItem('cart') as string) as Cart;
   }
 
+  // Watch cart changes to update loading state
+  watch(cart, () => {
+    isUpdatingCart.value = false;
+  });
+
+  // ==================== Helper Functions ====================
+
+  /**
+   * Get cart from localStorage or create a new one
+   */
+  function getCartFromStorage(): any {
+    return process.client && localStorage.getItem('cart')
+      ? JSON.parse(localStorage.getItem('cart') as string)
+      : structuredClone(addToCartJson.data.addToCart.cart);
+  }
+
+  /**
+   * Save cart to localStorage and update reactive state
+   */
+  function saveCart(cartData: any): void {
+    process.client && localStorage.setItem('cart', JSON.stringify(cartData));
+    cart.value = cartData;
+  }
+
+  /**
+   * Remove cart from localStorage and reset state
+   */
+  function clearCart(): void {
+    process.client && localStorage.removeItem('cart');
+    cart.value = null;
+  }
+
+  /**
+   * Handle operation errors consistently
+   */
+  function handleError(operation: string, error: any): void {
+    console.error(`Error during ${operation}:`, error);
+  }
+
+  /**
+   * Recalculate cart totals based on items
+   */
+  function recalculateCartTotals(cartData: any): void {
+    if (!cartData?.contents?.nodes) return;
+
+    // Calculate subtotal from items
+    let subtotalValue = 0;
+
+    for (const item of cartData.contents.nodes) {
+      const price = parseFloat(item.product?.node?.rawRegularPrice || "0");
+      subtotalValue += price * item.quantity;
+    }
+
+    // Update cart values
+    cartData.subtotal = `€${subtotalValue.toFixed(2)}`;
+    cartData.rawTotal = subtotalValue.toFixed(2);
+    cartData.total = `€${subtotalValue.toFixed(2)}`;
+  }
+
+  /**
+   * Check if cart is empty and update isEmpty flag
+   */
+  function updateEmptyState(cartData: any): void {
+    if (!cartData?.contents?.nodes) return;
+    cartData.isEmpty = cartData.contents.nodes.length === 0;
+  }
+
+  // ==================== Main Cart Functions ====================
+
+  /**
+   * Update the cart with new data
+   */
+  function updateCart(payload?: Cart | null): void {
+    cart.value = payload || null;
+
+    if (cart.value) {
+      saveCart(cart.value);
+    } else {
+      clearCart();
+    }
+  }
+
+  /**
+   * Reset cart to initial state
+   */
+  function resetInitialState(): void {
+    clearCart();
+  }
+
+  /**
+   * Refresh cart from server data
+   */
   async function refreshCart(): Promise<boolean> {
     try {
-      const { cart, customer, viewer, paymentGateways } = getCartJson.data;
-      const { updateCustomer, updateViewer } = useAuth();
+      const { cart: serverCart } = getCartJson.data;
 
-      if (cart) updateCart(cart);
-      if (customer) updateCustomer(customer);
-      if (viewer) updateViewer(viewer);
-      if (paymentGateways) updatePaymentGateways(paymentGateways);
+      if (serverCart) {
+        updateCart(serverCart);
+      }
 
-      return true; // Cart was successfully refreshed
+      return true;
     } catch (error: any) {
-      logGQLError(error);
-      clearAllCookies();
+      handleError('refreshCart', error);
       resetInitialState();
-
       return false;
     }
   }
 
-  function resetInitialState() {
-    cart.value = null;
-    paymentGateways.value = null;
-  }
-
-  function updateCart(payload?: Cart | null): void {
-    cart.value = payload || null;
-  }
-
-  function updatePaymentGateways(payload: PaymentGateways): void {
-    paymentGateways.value = payload;
-  }
-
-  // toggle the cart visibility
+  /**
+   * Toggle cart visibility
+   */
   function toggleCart(state: boolean | undefined = undefined): void {
     isShowingCart.value = state ?? !isShowingCart.value;
   }
 
-  // add an item to the cart
+  /**
+   * Add an item to the cart
+   */
   async function addToCart(input: any): Promise<void> {
     isUpdatingCart.value = true;
 
     try {
-      // const { addToCart } = await GqlAddToCart({ input })
-      const product = productsJson.data.value.products.nodes.find((product) => product.id === input.productId);
-      const oldCart = JSON.parse(localStorage.getItem('cart') as string);
-      console.log('oldCart', oldCart);
-      const { addToCart } = addToCartJson.data;
-      if (addToCart?.cart) cart.value = addToCart.cart;
-      localStorage.setItem('cart', JSON.stringify(cart.value));
-      // Auto open the cart when an item is added to the cart if the setting is enabled
-      const { storeSettings } = useAppConfig();
-      if (storeSettings.autoOpenCart && !isShowingCart.value) toggleCart(true);
+      // Get product data
+      const product = productsJson.data.value.products.nodes.find(
+        (p) => p.id === input.productId
+      );
+
+      if (!product) {
+        console.error('Product not found:', input.productId);
+        return;
+      }
+
+      // Get or initialize cart
+      const currentCart = getCartFromStorage();
+      const quantity = input.quantity || 1;
+
+      // Find existing item
+      const existingItemIndex = currentCart.contents.nodes.findIndex(
+        (node: any) => node.product?.node?.databaseId === input.productId
+      );
+
+      if (existingItemIndex !== -1) {
+        // Update existing item
+        const existingItem = currentCart.contents.nodes[existingItemIndex];
+        existingItem.quantity += quantity;
+        currentCart.contents.itemCount += quantity;
+      } else {
+        // Add new item
+        const newItem = {
+          quantity,
+          key: `item_${Date.now()}`,
+          product: { node: product },
+          variation: null,
+        };
+
+        currentCart.contents.nodes.push(newItem);
+        currentCart.contents.itemCount += quantity;
+        currentCart.contents.productCount += 1;
+      }
+
+      // Update cart state
+      updateEmptyState(currentCart);
+      recalculateCartTotals(currentCart);
+      saveCart(currentCart);
+
+      // Auto open cart if enabled
+      if (storeSettings.autoOpenCart && !isShowingCart.value) {
+        toggleCart(true);
+      }
     } catch (error: any) {
-      logGQLError(error);
-    }
-  }
-
-  // remove an item from the cart
-  async function removeItem(key: string) {
-    isUpdatingCart.value = true;
-    const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity: 0 });
-    // const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity: 0 }).data;
-    updateCart(updateItemQuantities?.cart);
-  }
-
-  // update the quantity of an item in the cart
-  async function updateItemQuantity(key: string, quantity: number): Promise<void> {
-    isUpdatingCart.value = true;
-    try {
-      const { updateItemQuantities } = await GqlUpDateCartQuantity({ key, quantity });
-      // const { updateItemQuantities } = nuxtApp.$useGql2('updateCartQuantity', { key, quantity }).data;
-      updateCart(updateItemQuantities?.cart);
-    } catch (error: any) {
-      logGQLError(error);
-    }
-  }
-
-  // empty the cart
-  async function emptyCart(): Promise<void> {
-    try {
-      isUpdatingCart.value = true;
-      // const { emptyCart } = await GqlEmptyCart();
-      const { emptyCart } = emptyCartJson.data;
-      localStorage.removeItem('cart');
-      updateCart(emptyCart?.cart);
-    } catch (error: any) {
-      logGQLError(error);
-    }
-  }
-
-  // Update shipping method
-  async function updateShippingMethod(shippingMethods: string) {
-    isUpdatingCart.value = true;
-    const { updateShippingMethod } = await GqlChangeShippingMethod({ shippingMethods });
-    updateCart(updateShippingMethod?.cart);
-  }
-
-  // Apply coupon
-  async function applyCoupon(code: string): Promise<{ message: string | null }> {
-    try {
-      isUpdatingCoupon.value = true;
-      const { applyCoupon } = await GqlApplyCoupon({ code });
-      updateCart(applyCoupon?.cart);
-      isUpdatingCoupon.value = false;
-    } catch (error: any) {
-      isUpdatingCoupon.value = false;
-      logGQLError(error);
-    }
-    return { message: null };
-  }
-
-  // Remove coupon
-  async function removeCoupon(code: string): Promise<void> {
-    try {
-      isUpdatingCart.value = true;
-      const { removeCoupons } = await GqlRemoveCoupons({ codes: [code] });
-      updateCart(removeCoupons?.cart);
-    } catch (error) {
-      logGQLError(error);
+      handleError('addToCart', error);
+    } finally {
       isUpdatingCart.value = false;
     }
   }
 
-  // Stop the loading spinner when the cart is updated
-  watch(cart, (val) => {
-    isUpdatingCart.value = false;
-  });
+  /**
+   * Update item quantity in cart
+   */
+  async function updateItemQuantity(key: string, quantity: number): Promise<void> {
+    isUpdatingCart.value = true;
 
-  // Check if all products in the cart are virtual
-  const allProductsAreVirtual = computed(() => {
-    const nodes = cart.value?.contents?.nodes || [];
-    return nodes.length === 0 ? false : nodes.every((node) => (node.product?.node as SimpleProduct)?.virtual === true);
-  });
+    try {
+      const currentCart = getCartFromStorage();
+      if (!currentCart) return;
 
-  // Check if the billing address is enabled
-  const isBillingAddressEnabled = computed(() => (storeSettings.hideBillingAddressForVirtualProducts ? !allProductsAreVirtual.value : true));
+      const itemIndex = currentCart.contents.nodes.findIndex(
+        (node: any) => node.key === key
+      );
 
+      if (itemIndex === -1) return;
+
+      const item = currentCart.contents.nodes[itemIndex];
+      const oldQuantity = item.quantity;
+
+      if (quantity <= 0) {
+        // Remove item
+        currentCart.contents.nodes.splice(itemIndex, 1);
+        currentCart.contents.itemCount -= oldQuantity;
+        currentCart.contents.productCount -= 1;
+      } else {
+        // Update quantity
+        item.quantity = quantity;
+        currentCart.contents.itemCount = currentCart.contents.itemCount - oldQuantity + quantity;
+      }
+
+      // Update cart state
+      updateEmptyState(currentCart);
+      recalculateCartTotals(currentCart);
+      saveCart(currentCart);
+    } catch (error: any) {
+      handleError('updateItemQuantity', error);
+    } finally {
+      isUpdatingCart.value = false;
+    }
+  }
+
+  /**
+   * Remove an item from cart
+   */
+  async function removeItem(key: string): Promise<void> {
+    // Reuse updateItemQuantity with quantity 0 to remove item
+    return updateItemQuantity(key, 0);
+  }
+
+  /**
+   * Empty the cart
+   */
+  async function emptyCart(): Promise<void> {
+    isUpdatingCart.value = true;
+
+    try {
+      const { emptyCart: emptyCartData } = emptyCartJson.data;
+      clearCart();
+
+      if (emptyCartData?.cart) {
+        updateCart(emptyCartData.cart);
+      }
+    } catch (error: any) {
+      handleError('emptyCart', error);
+    } finally {
+      isUpdatingCart.value = false;
+    }
+  }
+
+  // Return public API
   return {
+    // State
     cart,
     isShowingCart,
     isUpdatingCart,
-    isUpdatingCoupon,
-    paymentGateways,
-    isBillingAddressEnabled,
+
+    // Methods
     updateCart,
     refreshCart,
     toggleCart,
     addToCart,
-    removeItem,
     updateItemQuantity,
+    removeItem,
     emptyCart,
-    updateShippingMethod,
-    applyCoupon,
-    removeCoupon,
   };
 }

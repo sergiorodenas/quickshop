@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  ssr: false,
+  //ssr: false,
 
   // Get all the pages, components, composables and plugins from the parent theme
   extends: ['./woonuxt_base'],
@@ -20,5 +20,5 @@ export default defineNuxtConfig({
       interval: 1000,
       failOnError: false,
     },
-  },
+  }
 });
