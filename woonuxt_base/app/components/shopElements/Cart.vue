@@ -10,6 +10,10 @@ const redirectToStripe = async () => {
     mode: 'payment',
     successUrl: 'https://ide-preview-js.sergiorodenas.com/success',
     cancelUrl: 'https://ide-preview-js.sergiorodenas.com/cancel',
+    billingAddressCollection: 'required',
+    shippingAddressCollection: {
+      allowedCountries: ['ES'],
+    }
   })
 };
 </script>
